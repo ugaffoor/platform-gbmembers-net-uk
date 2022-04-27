@@ -1,0 +1,451 @@
+{
+  "afterLogoutPath": "",
+  "attributes": [
+    {
+      "name": "Admin Kapp Slug",
+      "values": [
+        "admin"
+      ]
+    },
+    {
+      "name": "Alerts Form Slug",
+      "values": [
+        "alerts"
+      ]
+    },
+    {
+      "name": "Allow Cash Payments",
+      "values": [
+        "true"
+      ]
+    },
+    {
+      "name": "Approval Form Slug",
+      "values": [
+        "approval"
+      ]
+    },
+    {
+      "name": "Australia School States",
+      "values": [
+        "ACT,NSW,NT,QLD,TAS,VIC,WA"
+      ]
+    },
+    {
+      "name": "AWS GBShop Bucket",
+      "values": [
+        "us-gbmembers-gbshop"
+      ]
+    },
+    {
+      "name": "AWS Photos Bucket",
+      "values": [
+        "us-gbmembers-photos"
+      ]
+    },
+    {
+      "name": "AWS Region",
+      "values": [
+        "us-east-2"
+      ]
+    },
+    {
+      "name": "Billing Company",
+      "values": [
+        "Stripe"
+      ]
+    },
+    {
+      "name": "Calendar Time Slots",
+      "values": [
+        "15"
+      ]
+    },
+    {
+      "name": "Card Region",
+      "values": [
+        "GB"
+      ]
+    },
+    {
+      "name": "Catalog Kapp Slug",
+      "values": [
+        "services"
+      ]
+    },
+    {
+      "name": "Change Manager Form Slug",
+      "values": [
+        "manager-change-request"
+      ]
+    },
+    {
+      "name": "Company Logo",
+      "values": [
+        "/app/datastore/submissions/617f9165-c2cb-11e8-aff8-15815e938e2a/files/Image%20File/0/Logo-GB-Sydney1.png"
+      ]
+    },
+    {
+      "name": "Currency",
+      "values": [
+        "GBP"
+      ]
+    },
+    {
+      "name": "Default Kapp Display",
+      "values": [
+        "gbmembers"
+      ]
+    },
+    {
+      "name": "Disable Self Sign Up",
+      "values": [
+        "false"
+      ]
+    },
+    {
+      "name": "Feedback Form Slug",
+      "values": [
+        "feedback"
+      ]
+    },
+    {
+      "name": "Footer Bundle Path",
+      "values": [
+        "space"
+      ]
+    },
+    {
+      "name": "Form Workflow",
+      "values": [
+        "Created - True",
+        "Deleted - True",
+        "Updated - True",
+        "Updated - Update Discussion META"
+      ]
+    },
+    {
+      "name": "Header Bundle Path",
+      "values": [
+        "space"
+      ]
+    },
+    {
+      "name": "Help Form Slug",
+      "values": [
+        "help"
+      ]
+    },
+    {
+      "name": "Hidden Users Regex",
+      "values": [
+        ".*@kinops.io$"
+      ]
+    },
+    {
+      "name": "Invite Others Form Slug",
+      "values": [
+        "kinops-invite-others"
+      ]
+    },
+    {
+      "name": "Kinetic Billing Server URL",
+      "values": [
+        "http://localhost:8081/billingservice"
+      ]
+    },
+    {
+      "name": "Libraries Bundle Path",
+      "values": [
+        "space"
+      ]
+    },
+    {
+      "name": "Member Discounts",
+      "values": [
+        "[{\"discount\":\"0%\",\"cost\":1.0},{\"discount\":\"10%\",\"cost\":0.9},{\"discount\":\"20%\",\"cost\":0.8},{\"discount\":\"30%\",\"cost\":0.7}]"
+      ]
+    },
+    {
+      "name": "Payment Frequencies",
+      "values": [
+        "Daily,Weekly,Fortnightly,Monthly"
+      ]
+    },
+    {
+      "name": "PhoneNumber Format",
+      "values": [
+        "###-###-####"
+      ]
+    },
+    {
+      "name": "POS Accepted Cards",
+      "values": [
+        "[\"amex\", \"visa\", \"mastercard\"]"
+      ]
+    },
+    {
+      "name": "POS Sales Tax",
+      "values": [
+        "0.012"
+      ]
+    },
+    {
+      "name": "POS Sales Tax Label",
+      "values": [
+        "Sales Tax"
+      ]
+    },
+    {
+      "name": "POS Service URL",
+      "values": [
+        "http://localhost:8081/billingservice/processPOS"
+      ]
+    },
+    {
+      "name": "POS Stripe Publishable Key",
+      "values": [
+        "pk_test_51JWcyBB2fHWqzrk8CjNc3g7Snxjh50WqZThnOveLSgNiwE0bqgF5N6riWb0v13NdS6n0RkJlHEEGZrcT6eS7ssAO00LKXJnF2X"
+      ]
+    },
+    {
+      "name": "POS System",
+      "values": [
+        "StripeTerminal"
+      ]
+    },
+    {
+      "name": "Queue Kapp Slug",
+      "values": [
+        "queue"
+      ]
+    },
+    {
+      "name": "Request Alert Form Slug",
+      "values": [
+        "kinops-request-an-alert"
+      ]
+    },
+    {
+      "name": "School Address",
+      "values": [
+        "2 Fulham High Street, London, SW6 3LQ"
+      ]
+    },
+    {
+      "name": "School City",
+      "values": [
+        "London"
+      ]
+    },
+    {
+      "name": "School Country Code",
+      "values": [
+        "GB"
+      ]
+    },
+    {
+      "name": "School Email",
+      "values": [
+        "gbusbeta2@gmail.com"
+      ]
+    },
+    {
+      "name": "School Freeze Charge",
+      "values": [
+        "25"
+      ]
+    },
+    {
+      "name": "School Legal Name",
+      "values": [
+        "GB UK Beta Limited"
+      ]
+    },
+    {
+      "name": "School Name",
+      "values": [
+        "GB UK Beta"
+      ]
+    },
+    {
+      "name": "School Postcode",
+      "values": [
+        "SW6 3LQ"
+      ]
+    },
+    {
+      "name": "School States",
+      "values": [
+        "I0,I1,I2,I3,I4,I5,I6,I7,I8,I9,IB,IC,IE,IF,IG,IH,II,IJ,IK,IM,IO,IP,IQ,IR,IS,IT,IU,I,IW,IX,IY,IZ,J0,J1,J2,J3,J4,J5,J6,J7,J8,J9,JA,JB,JC,JD,JE,JF,JG,JH,JI,JJ,JK,JL,JM,JN,JO,JP,JQ,JR,JS,JT,JU,JV,JW,JX,HAW,JY,JZ,K0,K1,K2,K3,K4,K5,K6,K7,K8,K9,KA,KB,KC,KD,KE,KF,KG,KI,KH,KJ,KK,KL,KM,KN,KP,KQ,KR,KT,KU,KV,KO,KW,KX,KZ,L0,L1,L2,L3,L4,L5,L6,L7,L8,L9,LB,LC,LD,LE,LF,LG,LH,LI,LJ,LK,LL,LM,LN,LO,LP,LQ,LR,LS,LT,LU,LV,LW,LX,LY,LZ,M0,M1,M2,M3,M4,M5,M6,M7"
+      ]
+    },
+    {
+      "name": "School Telephone",
+      "values": [
+        "6510001111"
+      ]
+    },
+    {
+      "name": "School Timetable URL",
+      "values": [
+        ""
+      ]
+    },
+    {
+      "name": "School Website",
+      "values": [
+        ""
+      ]
+    },
+    {
+      "name": "Service Days Due",
+      "values": [
+        "7"
+      ]
+    },
+    {
+      "name": "Services Slugs",
+      "values": [
+        "stripe-setup-biller-details,stripe-member-registration,stripe-member-cancellation,stripe-change-payment-type,stripe-extend-membership-freeze,stripe-membership-freeze,stripe-payments-reschedule,stripe-resume-frozen-member,cash-member-registration,incident-report,kids-registration,mens-registration,pink-team-registration"
+      ]
+    },
+    {
+      "name": "Shared Workflow Engine",
+      "values": [
+        "False"
+      ]
+    },
+    {
+      "name": "Stripe Account ID",
+      "values": [
+        "acct_1KndiLPh1yLRrgic"
+      ]
+    },
+    {
+      "name": "Submission Workflow",
+      "values": [
+        "Closed - False",
+        "Created - False",
+        "Deleted - False",
+        "Saved - False",
+        "Submitted - False",
+        "Updated - False"
+      ]
+    },
+    {
+      "name": "Suggest a Service Form Slug",
+      "values": [
+        "kinops-suggest-a-service"
+      ]
+    },
+    {
+      "name": "Task Assignee Team",
+      "values": [
+        "Default"
+      ]
+    },
+    {
+      "name": "Task Form Slug",
+      "values": [
+        "work-order"
+      ]
+    },
+    {
+      "name": "Task Server Host",
+      "values": [
+        "usbeta.gbmembers.net"
+      ]
+    },
+    {
+      "name": "Task Server Scheme",
+      "values": [
+        "https"
+      ]
+    },
+    {
+      "name": "Task Server Space Slug",
+      "values": [
+        "manage"
+      ]
+    },
+    {
+      "name": "Task Server Url",
+      "values": [
+        "https://usbeta.gbmembers.net/kinetic-task"
+      ]
+    },
+    {
+      "name": "Task Source Name",
+      "values": [
+        "Kinetic Request CE"
+      ]
+    },
+    {
+      "name": "Web Server Url",
+      "values": [
+        "https://ukbeta.gbmembers.net"
+      ]
+    }
+  ],
+  "bundlePath": "",
+  "customTranslationContexts": [
+
+  ],
+  "defaultDatastoreFormConfirmationPage": null,
+  "defaultDatastoreFormDisplayPage": null,
+  "defaultLocale": "en-US",
+  "defaultTimezone": "America/Los_Angeles",
+  "displayType": "Single Page App",
+  "displayValue": "spa.jsp?location=https://s3.us-east-2.amazonaws.com/us-gbmembers",
+  "enabledLocales": [
+    "en-AU",
+    "en-US"
+  ],
+  "loginPage": null,
+  "name": "GB UK Beta",
+  "platformComponents": {
+    "agents": [
+
+    ]
+  },
+  "resetPasswordPage": null,
+  "securityPolicies": [
+    {
+      "endpoint": "Display",
+      "name": "Authenticated Users"
+    },
+    {
+      "endpoint": "Teams Access",
+      "name": "Authenticated Users"
+    },
+    {
+      "endpoint": "Team Membership Modification",
+      "name": "Authenticated Users"
+    },
+    {
+      "endpoint": "Users Access",
+      "name": "Authenticated Users"
+    },
+    {
+      "endpoint": "User Creation",
+      "name": "Program Managers"
+    },
+    {
+      "endpoint": "User Modification",
+      "name": "Program Managers"
+    }
+  ],
+  "sessionInactiveLimitInSeconds": 2592000,
+  "sharedBundleBase": "hydrogen-v1",
+  "slug": "ukbeta",
+  "trustedFrameDomains": [
+
+  ],
+  "trustedResourceDomains": [
+
+  ],
+  "webApis": [
+
+  ]
+}
