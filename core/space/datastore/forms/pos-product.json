@@ -98,6 +98,13 @@
       "unique": false
     },
     {
+      "name": "values[Cost]",
+      "parts": [
+        "values[Cost]"
+      ],
+      "unique": false
+    },
+    {
       "name": "values[Details]",
       "parts": [
         "values[Details]"
@@ -611,6 +618,31 @@
         },
         {
           "type": "field",
+          "name": "Cost",
+          "label": "Cost",
+          "key": "f20",
+          "defaultValue": null,
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": false,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "text",
+          "rows": 1
+        },
+        {
+          "type": "field",
           "name": "Price",
           "label": "Price",
           "key": "f6",
@@ -798,6 +830,14 @@
               "value": "A5"
             },
             {
+              "label": "A5W",
+              "value": "A5W"
+            },
+            {
+              "label": "A6",
+              "value": "A6"
+            },
+            {
               "label": "F1",
               "value": "F1"
             },
@@ -816,6 +856,10 @@
             {
               "label": "F5",
               "value": "F5"
+            },
+            {
+              "label": "F6",
+              "value": "F6"
             },
             {
               "label": "Y0",

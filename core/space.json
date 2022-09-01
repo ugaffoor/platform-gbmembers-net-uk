@@ -185,18 +185,6 @@
       ]
     },
     {
-      "name": "POS Sales Tax",
-      "values": [
-        "0.012"
-      ]
-    },
-    {
-      "name": "POS Sales Tax Label",
-      "values": [
-        "Sales Tax"
-      ]
-    },
-    {
       "name": "POS Service URL",
       "values": [
         "http://localhost:8081/billingservice/processPOS"
@@ -211,7 +199,7 @@
     {
       "name": "POS System",
       "values": [
-        "StripeTerminal"
+        "Stripe"
       ]
     },
     {
@@ -319,7 +307,7 @@
     {
       "name": "Stripe Account ID",
       "values": [
-        "acct_1KndiLPh1yLRrgic"
+        "acct_1JWcyBB2fHWqzrk8"
       ]
     },
     {
@@ -394,12 +382,14 @@
   ],
   "defaultDatastoreFormConfirmationPage": null,
   "defaultDatastoreFormDisplayPage": null,
-  "defaultLocale": "en-US",
+  "defaultLocale": "en",
   "defaultTimezone": "America/Los_Angeles",
   "displayType": "Single Page App",
   "displayValue": "spa.jsp?location=https://s3.us-east-2.amazonaws.com/us-gbmembers",
   "enabledLocales": [
+    "en",
     "en-AU",
+    "en-GB",
     "en-US"
   ],
   "loginPage": null,

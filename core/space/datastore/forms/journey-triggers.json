@@ -913,6 +913,10 @@
                 {
                   "label": "Payment Failed",
                   "value": "Payment Failed"
+                },
+                {
+                  "label": "Member Joined",
+                  "value": "Member Joined"
                 }
               ]
             },
@@ -1126,7 +1130,7 @@
         {
           "type": "field",
           "name": "Additional Qual",
-          "label": "Additional Qualication <a href=\"javascript:$('#additionalHelp').toggle()\"> (Help)</a>",
+          "label": "Additional Qualification <a href=\"javascript:$('#additionalHelp').toggle()\"> (Help)</a>",
           "key": "f19",
           "defaultValue": null,
           "defaultResourceName": null,

@@ -2305,6 +2305,6 @@
   ],
   "slug": "member",
   "status": "New",
-  "submissionLabelExpression": "${values('Member ID')}",
+  "submissionLabelExpression": "${values('Member ID')}: ${values('Gender')} ${values('First Name')}",
   "type": "Content"
 }

@@ -34,13 +34,13 @@
     {
       "name": "Kinetic Billing Server URL",
       "values": [
-        "http://localhost:8081/billingservice"
+        "https://services.gbmembers.net/billingservice"
       ]
     },
     {
       "name": "Kinetic Email Server URL",
       "values": [
-        "https://services.gbmembers.net/mail-handler"
+        "https://services.gbmembers.net/mail-handler2"
       ]
     },
     {
@@ -58,7 +58,7 @@
     {
       "name": "Lead Status Values",
       "values": [
-        "Inquiry,Pending Intro 1,Pending Intro 2,Not Interested"
+        "Inquiry,Pending Intro 1,Pending Intro 2,Not Interested,Attended Intro,No Show,Followed Up"
       ]
     },
     {

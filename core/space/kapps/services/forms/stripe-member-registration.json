@@ -2088,11 +2088,11 @@
               "key": "f22",
               "defaultValue": "Credit Card",
               "defaultResourceName": null,
-              "visible": true,
+              "visible": false,
               "enabled": true,
               "required": true,
               "requiredMessage": null,
-              "omitWhenHidden": null,
+              "omitWhenHidden": false,
               "pattern": null,
               "constraints": [
 

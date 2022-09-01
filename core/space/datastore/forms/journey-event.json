@@ -72,6 +72,13 @@
       "unique": false
     },
     {
+      "name": "values[Event Source Date]",
+      "parts": [
+        "values[Event Source Date]"
+      ],
+      "unique": false
+    },
+    {
       "name": "values[Record ID]",
       "parts": [
         "values[Record ID]"
@@ -87,10 +94,19 @@
       "unique": false
     },
     {
-      "name": "values[Record ID],values[Trigger ID]:UNIQUE",
+      "name": "values[Record ID],values[Trigger ID]",
       "parts": [
         "values[Record ID]",
         "values[Trigger ID]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Record ID],values[Trigger ID],values[Trigger Date]:UNIQUE",
+      "parts": [
+        "values[Record ID]",
+        "values[Trigger ID]",
+        "values[Trigger Date]"
       ],
       "unique": true
     },
@@ -119,6 +135,13 @@
       "name": "values[Template Name]",
       "parts": [
         "values[Template Name]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Trigger Date]",
+      "parts": [
+        "values[Trigger Date]"
       ],
       "unique": false
     },
@@ -206,6 +229,54 @@
           "dataType": "string",
           "renderType": "text",
           "rows": 1
+        },
+        {
+          "type": "field",
+          "name": "Trigger Date",
+          "label": "Trigger Date",
+          "key": "f9",
+          "defaultValue": null,
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": false,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "date"
+        },
+        {
+          "type": "field",
+          "name": "Event Source Date",
+          "label": null,
+          "key": "f10",
+          "defaultValue": null,
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": false,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "date"
         },
         {
           "type": "field",
