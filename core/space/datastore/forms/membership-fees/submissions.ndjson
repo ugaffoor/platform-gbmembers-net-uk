@@ -1,10 +1,10 @@
-{"coreState":"Draft","currentPage":"Main","label":"e16c48c7-0fb5-11ec-b63a-65674070c8b1","values":{"Status":"active","Program":"BarraFIT Premium","Info":"(20% off BarraFIT + GB3) = $154","Fee":"154","Frequency":"Fortnightly"}}
-{"coreState":"Draft","currentPage":"Main","label":"e17e231b-0fb5-11ec-b63a-f9119aab6a39","values":{"Status":"active","Program":"BarraFIT","Info":"$80/fortnight","Fee":"80","Frequency":"Fortnightly"}}
-{"coreState":"Draft","currentPage":"Main","label":"e18ffe0a-0fb5-11ec-bebe-5f694bcfd35e","values":{"Status":"active","Program":"GB3","Info":"$90/fortnight","Fee":"90","Frequency":"Fortnightly"}}
-{"coreState":"Draft","currentPage":"Main","label":"e1a2c2be-0fb5-11ec-bebe-b1c8522b2ed3","values":{"Status":"active","Program":"GB2","Info":"$85/fortnight","Fee":"85","Frequency":"Fortnightly"}}
-{"coreState":"Draft","currentPage":"Main","label":"e1b4273f-0fb5-11ec-b63a-97aa557b9ac7","values":{"Status":"active","Program":"GB1","Info":"$80/fortnight","Fee":"80","Frequency":"Fortnightly"}}
-{"coreState":"Draft","currentPage":"Main","label":"e1c67662-0fb5-11ec-bebe-df14d3469c37","values":{"Status":"active","Program":"GBK2","Info":"$90/fortnight for classes more than twice a week","Fee":"90","Frequency":"Fortnightly"}}
-{"coreState":"Draft","currentPage":"Main","label":"e1d89ed6-0fb5-11ec-bebe-71e5ec7f5149","values":{"Status":"active","Program":"GBK1","Info":"$70/fortnight for classes twice a week","Fee":"70","Frequency":"Fortnightly"}}
+{"coreState":"Submitted","currentPage":"Main","label":"e16c48c7-0fb5-11ec-b63a-65674070c8b1","values":{"Status":"active","Program":"BarraFIT Premium","Info":"(20% off BarraFIT + GB3) = £154","Fee":"154","Frequency":"Fortnightly"}}
+{"coreState":"Submitted","currentPage":"Main","label":"e17e231b-0fb5-11ec-b63a-f9119aab6a39","values":{"Status":"active","Program":"BarraFIT","Info":"£80/fortnight","Fee":"80","Frequency":"Fortnightly"}}
+{"coreState":"Submitted","currentPage":"Main","label":"e18ffe0a-0fb5-11ec-bebe-5f694bcfd35e","values":{"Status":"active","Program":"GB3","Info":"£90/fortnight","Fee":"90","Frequency":"Fortnightly"}}
+{"coreState":"Submitted","currentPage":"Main","label":"e1a2c2be-0fb5-11ec-bebe-b1c8522b2ed3","values":{"Status":"active","Program":"GB2","Info":"£85/fortnight","Fee":"85","Frequency":"Fortnightly"}}
+{"coreState":"Submitted","currentPage":"Main","label":"e1b4273f-0fb5-11ec-b63a-97aa557b9ac7","values":{"Status":"active","Program":"GB1","Info":"£80/fortnight","Fee":"80","Frequency":"Fortnightly"}}
+{"coreState":"Submitted","currentPage":"Main","label":"e1c67662-0fb5-11ec-bebe-df14d3469c37","values":{"Status":"active","Program":"GBK2","Info":"£90/fortnight for classes more than twice a week","Fee":"90","Frequency":"Fortnightly"}}
+{"coreState":"Submitted","currentPage":"Main","label":"e1d89ed6-0fb5-11ec-bebe-71e5ec7f5149","values":{"Status":"active","Program":"GBK1","Info":"£70/fortnight for classes twice a week","Fee":"70","Frequency":"Fortnightly"}}
 {"coreState":"Draft","currentPage":"Main","label":"e1eaee5a-0fb5-11ec-bebe-b1e44494efcf","values":{"Status":"active","Program":"GB1","Info":"GB1 - Weekly","Fee":"30","Frequency":"Weekly"}}
 {"coreState":"Draft","currentPage":"Main","label":"e1fd3e33-0fb5-11ec-b63a-b581b98eabd1","values":{"Status":"active","Program":"GBK 1","Info":"GBK1 - Weekly","Fee":"25","Frequency":"Weekly"}}
 {"coreState":"Draft","currentPage":"Main","label":"e20f66a9-0fb5-11ec-b63a-dd3159eac342","values":{"Status":"active","Program":"GB1","Info":"GB1(Monthly)","Fee":"190","Frequency":"Monthly"}}

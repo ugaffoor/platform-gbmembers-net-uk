@@ -573,6 +573,31 @@
               },
               "dataType": "string",
               "renderType": "date"
+            },
+            {
+              "type": "field",
+              "name": "Opt-Out",
+              "label": "Opt-Out",
+              "key": "f95",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
             }
           ]
         },
@@ -865,6 +890,31 @@
               "name": "Non Paying",
               "label": "Non Paying",
               "key": "f73",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "POS Profile ID",
+              "label": "POS Profile ID",
+              "key": "f90",
               "defaultValue": null,
               "defaultResourceName": null,
               "visible": true,
@@ -1437,7 +1487,7 @@
               "type": "field",
               "name": "Biller Migrated",
               "label": "Biller Migrated",
-              "key": "f90",
+              "key": "f91",
               "defaultValue": null,
               "defaultResourceName": null,
               "visible": true,
@@ -1656,6 +1706,81 @@
               },
               "dataType": "string",
               "renderType": "date"
+            },
+            {
+              "type": "field",
+              "name": "Membership TAX 1",
+              "label": "Membership TAX 1",
+              "key": "f96",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Membership TAX 2",
+              "label": "Membership TAX 2",
+              "key": "f97",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Membership TAX 3",
+              "label": "Membership TAX 3",
+              "key": "f98",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
             }
           ]
         },
@@ -2267,6 +2392,81 @@
           "rows": 1
         },
         {
+          "type": "field",
+          "name": "Student Covid Check",
+          "label": "Student Covid Check",
+          "key": "f92",
+          "defaultValue": null,
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": false,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "text",
+          "rows": 1
+        },
+        {
+          "type": "field",
+          "name": "Mother Covid Check",
+          "label": "Mother Covid Check",
+          "key": "f93",
+          "defaultValue": null,
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": false,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "text",
+          "rows": 1
+        },
+        {
+          "type": "field",
+          "name": "Father Covid Check",
+          "label": "Father Covid Check",
+          "key": "f94",
+          "defaultValue": null,
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": false,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "text",
+          "rows": 1
+        },
+        {
           "type": "button",
           "label": "Submit",
           "name": "Submit Button",
@@ -2305,6 +2505,6 @@
   ],
   "slug": "member",
   "status": "New",
-  "submissionLabelExpression": "${values('Member ID')}: ${values('Gender')} ${values('First Name')}",
+  "submissionLabelExpression": "${values('Member ID')}-${values('POS Profile ID')}: ${values('Date Joined')}",
   "type": "Content"
 }

@@ -334,6 +334,30 @@
             },
             {
               "type": "field",
+              "name": "Trial Booking Datetime",
+              "label": "Trial Booking Datetime",
+              "key": "f49",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "datetime"
+            },
+            {
+              "type": "field",
               "name": "First Name",
               "label": "First Name",
               "key": "f3",
@@ -827,6 +851,31 @@
               "dataType": "string",
               "renderType": "text",
               "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Opt-Out",
+              "label": "Opt-Out",
+              "key": "f48",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
             }
           ]
         },
@@ -1241,6 +1290,6 @@
   ],
   "slug": "lead",
   "status": "New",
-  "submissionLabelExpression": "${values('First Name')} ${values('Last Name')} : ${values('Reminder Date')}",
+  "submissionLabelExpression": "${values('First Name')} ${values('Last Name')}:${values('Is New Reply Received')}:${values('Phone Number')}:${values('Interest in Program')}",
   "type": "Content"
 }

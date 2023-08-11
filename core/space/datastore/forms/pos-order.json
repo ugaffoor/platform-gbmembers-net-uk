@@ -121,6 +121,20 @@
       "unique": false
     },
     {
+      "name": "values[Refund]",
+      "parts": [
+        "values[Refund]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Sales Tax 2]",
+      "parts": [
+        "values[Sales Tax 2]"
+      ],
+      "unique": false
+    },
+    {
       "name": "values[Sales Tax]",
       "parts": [
         "values[Sales Tax]"
@@ -208,6 +222,10 @@
             {
               "label": "Ordered",
               "value": "Ordered"
+            },
+            {
+              "label": "Refunded",
+              "value": "Refunded"
             }
           ]
         },
@@ -375,11 +393,19 @@
           "choices": [
             {
               "label": "Credit Card",
-              "value": "Credit Card"
+              "value": "creditcard"
+            },
+            {
+              "label": "Capture",
+              "value": "capture"
             },
             {
               "label": "Cash",
-              "value": "Cash"
+              "value": "cash"
+            },
+            {
+              "label": "Use Saved Credit Card",
+              "value": "useSavedCreditCard"
             }
           ]
         },
@@ -560,9 +586,59 @@
         },
         {
           "type": "field",
+          "name": "Sales Tax 2",
+          "label": "Sales Tax 2",
+          "key": "f18",
+          "defaultValue": null,
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": false,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "text",
+          "rows": 1
+        },
+        {
+          "type": "field",
           "name": "Total",
           "label": "Total",
           "key": "f13",
+          "defaultValue": null,
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": false,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "text",
+          "rows": 1
+        },
+        {
+          "type": "field",
+          "name": "Refund",
+          "label": "Refund",
+          "key": "f17",
           "defaultValue": null,
           "defaultResourceName": null,
           "visible": true,
@@ -618,5 +694,5 @@
   ],
   "slug": "pos-order",
   "status": "New",
-  "submissionLabelExpression": "${values('Person Type')}-${values('Person Name')}-${values('Payment Type')}-${values('Date time processed')}-${values('Transaction ID')}-${values('Sales Tax')}"
+  "submissionLabelExpression": "${values('Person Type')}-${values('Person Name')}-${values('Payment Type')}-${values('Date time processed')}-${values('Transaction ID')}-${values('Sales Tax')}:${values('Status')}:${values('Refund')}"
 }

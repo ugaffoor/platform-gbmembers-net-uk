@@ -151,7 +151,7 @@
     {
       "name": "Kinetic Billing Server URL",
       "values": [
-        "http://localhost:8081/billingservice"
+        "https://services.gbmembers.net/billingservice"
       ]
     },
     {
@@ -163,31 +163,31 @@
     {
       "name": "Member Discounts",
       "values": [
-        "[{\"discount\":\"0%\",\"cost\":1.0},{\"discount\":\"10%\",\"cost\":0.9},{\"discount\":\"20%\",\"cost\":0.8},{\"discount\":\"30%\",\"cost\":0.7}]"
+        "[{\"discount\":\"0%\",\"cost\":1.0},{\"discount\":\"25%\",\"cost\":0.75},{\"discount\":\"25%\",\"cost\":0.75},{\"discount\":\"50%\",\"cost\":0.5}]"
       ]
     },
     {
       "name": "Payment Frequencies",
       "values": [
-        "Daily,Weekly,Fortnightly,Monthly"
+        "Monthly"
       ]
     },
     {
       "name": "PhoneNumber Format",
       "values": [
-        "###-###-####"
+        "## ### ######"
       ]
     },
     {
       "name": "POS Accepted Cards",
       "values": [
-        "[\"amex\", \"visa\", \"mastercard\"]"
+        "[]"
       ]
     },
     {
       "name": "POS Service URL",
       "values": [
-        "http://localhost:8081/billingservice/processPOS"
+        "https://services.gbmembers.net/billingservice/processPOS"
       ]
     },
     {
@@ -199,7 +199,13 @@
     {
       "name": "POS System",
       "values": [
-        "Stripe"
+        "StripeTerminal"
+      ]
+    },
+    {
+      "name": "Postcode Format",
+      "values": [
+        ""
       ]
     },
     {
@@ -245,6 +251,12 @@
       ]
     },
     {
+      "name": "School From Alias",
+      "values": [
+        "UK Beta"
+      ]
+    },
+    {
       "name": "School Legal Name",
       "values": [
         "GB UK Beta Limited"
@@ -265,7 +277,7 @@
     {
       "name": "School States",
       "values": [
-        "I0,I1,I2,I3,I4,I5,I6,I7,I8,I9,IB,IC,IE,IF,IG,IH,II,IJ,IK,IM,IO,IP,IQ,IR,IS,IT,IU,I,IW,IX,IY,IZ,J0,J1,J2,J3,J4,J5,J6,J7,J8,J9,JA,JB,JC,JD,JE,JF,JG,JH,JI,JJ,JK,JL,JM,JN,JO,JP,JQ,JR,JS,JT,JU,JV,JW,JX,HAW,JY,JZ,K0,K1,K2,K3,K4,K5,K6,K7,K8,K9,KA,KB,KC,KD,KE,KF,KG,KI,KH,KJ,KK,KL,KM,KN,KP,KQ,KR,KT,KU,KV,KO,KW,KX,KZ,L0,L1,L2,L3,L4,L5,L6,L7,L8,L9,LB,LC,LD,LE,LF,LG,LH,LI,LJ,LK,LL,LM,LN,LO,LP,LQ,LR,LS,LT,LU,LV,LW,LX,LY,LZ,M0,M1,M2,M3,M4,M5,M6,M7"
+        "  Aberdeen City,AberdeenshireAngus,Antrim,Ards,Argyll and Bute,Armagh,Ballymena,Ballymoney,Banbridge,Barking and Dagenham,Barnet,Barnsley,Bath and North East Somerset,Bedfordshire,Belfast,Berkshire,Bexley,Birmingham,Blackburn with Darwen,Blackpool,Blaenau Gwent,Bolton,Bournemouth,Bracknell Forest,Bradford,Brent,Bridgend,Brighton and Hove,Bristol, City of,Bromley,Buckinghamshire,Bury,Caerphilly,Calderdale,Cambridgeshire,Camden,Cardiff,Carmarthenshire,Carrickfergus,Castlereagh,Catford,Ceredigion,Cheshire,Clackmannanshire,Coleraine,Conwy,Cookstown,Cornwall,Coventry,Craigavon,Croydon,Cumbria,Darlington,Denbighshire,Deptford,Derby,Derbyshire,Derry,Devon,Doncaster,Dorset,Down,Dudley,Dumfries and Galloway,Dundee City,Dungannon,Durham,Ealing,East Ayrshire,East Dunbartonshire,East Lothian,East Renfrewshire,East Riding of Yorkshire,East Sussex,Edinburgh, City of,Eilean Siar,Enfield,Essex,Falkirk,Fermanagh,Fife,Flintshire,Gateshead,Glasgow City,Gloucestershire,Greenwich,Gwynedd,Hackney,Halton,Hammersmith and Fulham,Hampshire,Haringey,Harrow,Hartlepool,Havering,Herefordshire,Hertfordshire,Highland,Hillingdon,Hounslow,Inverclyde,Isle of Anglesey,Isle of Wight,Islington,Kensington and Chelsea,Kent,Kingston upon Hull, City of,Kingston upon Thames,Kirklees,Knowsley,Lambeth,Lancashire,Larne,Leeds,Leicester,Leicestershire,Lewisham,Limavady,Lincolnshire,Lisburn,Liverpool,London,London, City of,Luton,Magherafelt,Manchester,Medway,Merthyr Tydfil,Merton,Middlesbrough,Middlesex,Midlothian,Milton Keynes,Monmouthshire,Moray,Moyle,Neath Port Talbot,Newcastle upon Tyne,Newham,Newport,Newry and Mourne,Newtownabbey,Norfolk,North Ayrshire,North Down,North East Lincolnshire,North Lanarkshire,North Lincolnshire,North Somerset,North Tyneside,North Yorkshire,Northamptonshire,Northumberland,Nottingham,Nottinghamshire,Oldham,Omagh,Orkney Islands,Oxfordshire,Pembrokeshire,Perth and Kinross,Peterborough,Plymouth,Poole,Portsmouth,Powys,Reading,Redbridge,Redcar and Cleveland,Renfrewshire,Rhondda Cynon Taff,Richmond upon Thames,Rochdale,Rotherham,Rutland,Salford,Sandwell,Scottish Borders, The,Sefton,Sheffield,Shetland Islands,Shropshire,Slough,Solihull,Somerset,South Ayrshire,South Gloucestershire,South Lanarkshire,South Tyneside,Southampton,Southend-on-Sea,Southwark,St. Helens,Staffordshire,Stirling,Stockport,Stockton-on-Tees,Stoke-on-Trent,Strabane,Suffolk,Sunderland,Surrey,Sutton,Swansea,Swindon,Tameside,Telford and Wrekin,Thurrock,Torbay,Torfaen,Tower Hamlets,Trafford,Vale of Glamorgan, The,Wakefield,Walsall,Waltham Forest,Wandsworth,Warrington,Warwickshire,West Berkshire,West Dunbartonshire,West Lothian,West Midlands,West Sussex,Westminster,Wigan,Wiltshire,Windsor and Maidenhead,Wirral,Wokingham,Wolverhampton,Worcestershire,Wrexham,York"
       ]
     },
     {
@@ -307,7 +319,7 @@
     {
       "name": "Stripe Account ID",
       "values": [
-        "acct_1JWcyBB2fHWqzrk8"
+        "acct_1KndiLPh1yLRrgic"
       ]
     },
     {
