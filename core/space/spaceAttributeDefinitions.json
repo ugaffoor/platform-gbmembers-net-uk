@@ -146,6 +146,11 @@
   },
   {
     "allowsMultiple": false,
+    "description": "Location of the Meta JSON file to work with ReactCacheBuster.\nThis is to ensure code releases are automatically picked up.",
+    "name": "Meta JSON Location"
+  },
+  {
+    "allowsMultiple": false,
     "description": "Weekly,Fortnightly,Monthly,Quarterly",
     "name": "Payment Frequencies"
   },

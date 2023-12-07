@@ -151,7 +151,7 @@
     {
       "name": "Kinetic Billing Server URL",
       "values": [
-        "https://services.gbmembers.net/billingservice"
+        "http://localhost:8081/billingservice"
       ]
     },
     {
@@ -167,9 +167,15 @@
       ]
     },
     {
+      "name": "Meta JSON Location",
+      "values": [
+        "https://us-gbmembers.s3.us-east-2.amazonaws.com"
+      ]
+    },
+    {
       "name": "Payment Frequencies",
       "values": [
-        "Monthly"
+        "Fortnightly,Monthly"
       ]
     },
     {
