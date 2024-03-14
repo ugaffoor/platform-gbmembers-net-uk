@@ -1,6 +1,11 @@
 {
   "attributes": [
-
+    {
+      "name": "Datastore Hidden",
+      "values": [
+        "true"
+      ]
+    }
   ],
   "bridgedResources": [
 
@@ -101,6 +106,15 @@
       "name": "values[Member GUID]",
       "parts": [
         "values[Member GUID]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Member GUID],values[Status],values[Class Date]",
+      "parts": [
+        "values[Member GUID]",
+        "values[Status]",
+        "values[Class Date]"
       ],
       "unique": false
     },

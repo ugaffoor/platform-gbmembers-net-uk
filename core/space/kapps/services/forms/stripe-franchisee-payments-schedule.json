@@ -1,0 +1,1050 @@
+{
+  "anonymous": false,
+  "attributes": [
+    {
+      "name": "Cancel Disabled",
+      "values": [
+        "true"
+      ]
+    },
+    {
+      "name": "Cloning Disabled",
+      "values": [
+        "true"
+      ]
+    },
+    {
+      "name": "Comment Disabled",
+      "values": [
+        "true"
+      ]
+    },
+    {
+      "name": "Submission Workflow",
+      "values": [
+        "Submitted - True"
+      ]
+    }
+  ],
+  "bridgedResources": [
+    {
+      "model": "Members",
+      "name": "Get Member",
+      "order": [
+
+      ],
+      "parameters": [
+        {
+          "mapping": "${values('Members')}",
+          "name": "ID"
+        }
+      ],
+      "qualification": "Get Member",
+      "status": "Active"
+    },
+    {
+      "model": "Members",
+      "name": "Get Member By Username",
+      "order": [
+
+      ],
+      "parameters": [
+        {
+          "mapping": "${identity('username')}",
+          "name": "username"
+        }
+      ],
+      "qualification": "Get Member by Username",
+      "status": "Active"
+    },
+    {
+      "model": "Service Member Submissions",
+      "name": "Get Stripe Payments Schedule",
+      "order": [
+
+      ],
+      "parameters": [
+        {
+          "mapping": "${values('Member GUID')}",
+          "name": "Member GUID"
+        }
+      ],
+      "qualification": "Get Stripe Payment Schedule",
+      "status": "Active"
+    },
+    {
+      "model": "Members",
+      "name": "Members",
+      "order": [
+
+      ],
+      "parameters": [
+
+      ],
+      "qualification": "Active Members",
+      "status": "Active"
+    }
+  ],
+  "categorizations": [
+    {
+      "category": {
+        "slug": "stripe-billing"
+      }
+    }
+  ],
+  "customHeadContent": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<script src=\"https://js.stripe.com/v3/\" defer></script>\n<script>\nvar stripe = null;\nvar elements = null;\n\nvar cardElement = null;\nvar ibanElement = null;\nvar sourceID = null;  \n</script>\n<style>\n  #card-element {\n    width: 400px;\n\t}\n</style>\n<script>\n  function GetURLParameter(sParam){\n    arr=window.location.hash.split(sParam+\"=\");\n    if (arr.length>1){\n      return arr[1];\n    }\n    arr=window.location.hash.split(\"/\");\n    if (arr[arr.length-1]===K('form').slug()){\n      return null;\n    } else {   \n\t    return arr[arr.length-1];\n    }\n  }  \n</script>\n<script>\n\tfunction completeSignUpFee() {\n    debugger;\n    var registerSettings = {\n      \"crossDomain\": true,\n      \"url\": K('space').attributes('Kinetic Billing Server URL')+\"/registerUser\",\n      \"method\": \"POST\",\n      \"headers\": {},\n      \"dataType\": \"json\",\n      \"contentType\": \"application/json\",\n      \"data\": JSON.stringify({\n        \"customerId\": K('field[Member ID]').value(),\n        \"firstName\": K('field[First Name]').value(),\n        \"lastName\": K('field[Last Name]').value(),\n        \"address\": K('field[Address]').value(),\n        \"suburb\": K('field[Suburb]').value(),\n        \"state\": K('field[State]').value(),\n        \"postCode\": K('field[Postcode]').value(),\n        \"email\": K('field[Email]').value(),\n        \"payment\": K('field[Payment]').value(),\n        \"firstPayment\": K('field[Payment]').value(),\n        \"billingPeriod\": K('field[Billing Period]').value(),\n        \"contractStartDate\": K('field[Billing Start Date]').value(),\n        \"paymentMethod\": K('field[Payment Method]').value(),\n        \"cardToken\": sourceID,\n        \"space\": K('space').slug(),\n        \"billingService\": K('space').attributes('Billing Company'),\n        \"currency\": K('space').attributes('Currency'),\n        \"subscriptionType\": \"Franchisee Payments Schedule\",\n      })\n    }\n    $.ajax(registerSettings).done(function (response) {\n      debugger;\n      console.log(response);\n      if (response.error===100) {\n        var message=response.errorMessage;\n        if (response.errorMessage===\"DECLINE\") {\n          message=\"Credit Card not valid (Declined)\";  \n        }\n        K('button[Submit]').enable();\n\n        $(\"#errorValue\").html(message);\n        K('section[Card Error]').show();\n      } else {\n        K('section[Card Error]').hide();\n        K('field[customerBillingId]').value(response.data.customerBillingId);\n        K('form').submitPage();\n      }\n    });        \n  }\n</script>  \n<style>\n.errorDetails {\n    background-color: red;\n    border-radius: 5px;\n    margin: 5px;\n}  \n.card-container {\n    background-color: rgb(240, 240, 240);\n    margin: auto;\n    width: calc(95%);\n\n    border: none;\n    border-radius: 4px;\n}\n.form-group {\n    flex: 0 0 auto;\n    flex-flow: column !important;\n}\n#checkout-form {\n    position: relative;\n    width: 400px;\n    padding: 10px;\n}\n\n#checkout-form label {\n    display: block;\n    min-height: 25px;\n\n    font-size: 15px;\n    font-weight: 500;\n    margin: 5px 0;\n    padding: 0;\n    color: red;\n}\n\n#card-number, #card-cvv, #card-expiry {\n    background-color: #FFF;\n    display: block;\n    width: calc(90%);\n    border-radius: 2px;\n    border: 1px solid rgba(200, 200, 200, 1);\n    padding: 14px 60px 13px 20px;\n    margin: auto;\n    transition: all 100ms ease-out;\n}\n\n/* card images are added to card number */\n#card-number {\n    background-image: none;\n\n    background-origin: content-box;\n    background-position: calc(100% + 40px) center;\n    background-repeat: no-repeat;\n    background-size: contain;\n}\n\n/* buttons */\n.btn {\n    vertical-align: top;\n}\n\n#pay-button {\n    position: relative;\n    border: none;\n    border-radius: 4px;\n    background-color: #0c384f;\n    color: rgba(255, 255, 255, 1);\n    display: inline-block;\n    transition: all 100ms ease-out;\n    padding: 11px 25px;\n    margin-left: 30px;\n}\n\n#pay-button:hover, #pay-button:active {\n    background-color: rgba(69, 36, 89, 1);\n}\n\n#pay-button:active {\n    box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.3);\n}\n\n#pay-button:disabled {\n    background-color: rgba(255, 255, 255, 1);\n    border: 1px solid #0c384f;\n    color: #0c384f;\n}\n\n/* feedback is displayed after tokenization */\n#feedback {\n    position: relative;\n    left: 15px;\n    display: inline-block;\n    background-color: transparent;\n    border: 0px solid rgba(200, 200, 200, 1);\n    border-radius: 4px;\n    transition: all 100ms ease-out;\n    padding: 11px;\n}\n\n#feedback.error {\n    color: red;\n    border: 1px solid;\n}\n\n#feedback.success {\n    color: seagreen;\n    border: 1px solid;\n}\n</style>\n<style>\n\t.acceptTerms + label {\n    margin-left: 20px !important;\n\t}  \n  .hidden{\n   display:none; \n  }\nbody a {\n    color: #003b72;\n}  \nbutton.editButton {\n    border-radius: .25rem;\n    line-height: 1.0rem;\n    padding: .2rem 0.8rem;\n    margin-right: .5rem;\n    border: none;\n    color: #fff;\n    font-size: .75rem;\n    background-color: #0c384f;\n}\n</style>\n\n<script>\nfunction enabledAddressEdit(){\n  K('field[Address]').enable();\n  K('field[Suburb]').enable();\n  K('field[State]').enable();\n  K('field[Postcode]').enable();\n}\nfunction geolocate() {\n  if (navigator.geolocation) {\n    navigator.geolocation.getCurrentPosition(function(position) {\n      var geolocation = {\n        lat: position.coords.latitude,\n        lng: position.coords.longitude\n      };\n      var circle = new google.maps.Circle(\n          {center: geolocation, radius: position.coords.accuracy});\n      autocomplete.setBounds(circle.getBounds());\n    });\n  }\n}\nfunction fillInAddress() {\n  K(\"field[Address]\").value(\"\");\n\n  // Get the place details from the autocomplete object.\n  var place = autocomplete.getPlace();\n\ndebugger;\n  // Get each component of the address from the place details,\n  // and then fill-in the corresponding field on the form.\n  for (var i = 0; i < place.address_components.length; i++) {\n    var addressType = place.address_components[i].types[0];\n\n    if (addressType===\"street_number\") {\n    \tK(\"field[Address]\").value(place.address_components[i][\"long_name\"]);\n    }\n    if (addressType===\"route\") {\n    \tK(\"field[Address]\").value(K(\"field[Address]\").value()+\" \"+place.address_components[i][\"long_name\"]);\n    }\n    if (addressType===\"locality\") {\n    \tK(\"field[Suburb]\").value(place.address_components[i][\"long_name\"]);\n    }\n    if (addressType===\"administrative_area_level_1\") {\n    \tK(\"field[State]\").value(place.address_components[i][\"short_name\"]);\n    }\n    if (addressType===\"postal_code\") {\n    \tK(\"field[Postcode]\").value(place.address_components[i][\"short_name\"]);\n    }\n    if (addressType===\"country\") {\n    \tK(\"field[Country]\").value(place.address_components[i][\"long_name\"]);\n    }\n  }\n}  \nfunction initAutocomplete() {\n  debugger;\n  if (document.getElementById('autocomplete')!==undefined) {\n    // Create the autocomplete object, restricting the search predictions to\n    // geographical location types.\n    try {\n      if (document.getElementById('autocomplete')!==null) {\n\t      autocomplete = new google.maps.places.Autocomplete(\n          document.getElementById('autocomplete'), {types: ['geocode']});\n\n  \t    // Avoid paying for data that you don't need by restricting the set of\n    \t  // place fields that are returned to just the address components.\n      \tautocomplete.setFields(['address_component']);\n\n      \t// When the user selects an address from the drop-down, populate the\n      \t// address fields in the form.\n      \tautocomplete.addListener('place_changed', fillInAddress);\n      }\n    } catch (e) {\n    \tconsole.log(\"Error handling autocompete\");\n    }\n  }\n}  \n</script>\n\n<script src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyANn8OeuTR-YH0f-l7S-Qk04cROra8iUfM&libraries=places&callback=initAutocomplete\"\n        async defer>\n</script>",
+  "description": "Franchisee Monthly payment schedule",
+  "name": "Stripe Franchisee Payments Schedule",
+  "notes": null,
+  "pages": [
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Registrations",
+          "title": null,
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {
+          },
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "registrations",
+              "text": "<div>\n  <table>\n    <tbody  id=\"registrationsTableBody\">      \n    </tbody>\n  </table>\n</div>",
+              "visible": true,
+              "renderAttributes": {
+              }
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Not to be Completed",
+          "title": null,
+          "visible": false,
+          "omitWhenHidden": true,
+          "renderAttributes": {
+          },
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "MessageOne",
+              "text": "<p>This form must be initiated by the a Gracie Barra Franchisee Representative.</p>",
+              "visible": true,
+              "renderAttributes": {
+              }
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Select Member",
+          "title": "Select School",
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {
+          },
+          "elements": [
+            {
+              "type": "field",
+              "name": "Members",
+              "label": "Schools",
+              "key": "f38",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": "values('Member ID')===null",
+              "requiredMessage": "A school must be selected",
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+                {
+                  "name": "Get Members",
+                  "type": "Change",
+                  "action": "Custom",
+                  "code": "K('bridgedResource[Get Member]').load({\n  attributes: ['Member ID', 'First Name', 'Last Name'],\n  values: {'ID' : 'Allen'},\n  success: function(bridgedData) {\n debugger;   \n    if (bridgedData===null) return;\n    K('field[Member GUID]').value(bridgedData['id']);\n    K('field[Member ID]').value(bridgedData['Member ID']);\n    K('field[First Name]').value(bridgedData['First Name']);\n    K('field[Last Name]').value(bridgedData['Last Name']);\n\n    K('field[Address]').value(bridgedData['Address']);\n    K('field[Suburb]').value(bridgedData['Suburb']);\n    K('field[Postcode]').value(bridgedData['Postcode']);\n    K('field[State]').value(bridgedData['State']);\n\n    K('field[Email]').value(bridgedData['Email']);\n    K('field[Payment Method]').value(\"Credit Card\");\n    K('field[Payment Method]').disable();\n    \n    if ($(K(\"form\").find(\"#billingstartdate\")[0]).html()===\"\") {\n      var tomorrow = new Date((new Date()).getTime() + 24 * 60 * 60 * 1000);\n      bundle.config.widgets.xdsoftDatepicker({\n        element: K(\"form\").find(\"#billingstartdate\")[0],\n        timepicker: false,\n        displayDateFormat: \"MM/DD/YYYY\",\n        options: {\n          startDate: tomorrow,\n          minDate: 0,\n          formatDate:\"d-m-Y\",\n          validateOnBlur:false\n        },\n        onSelectDate:function(ct,$i){\n          K('field[Billing Start Date]').value(ct.dateFormat('YYYY-MM-DD'));\n        },\n        onGenerate: function( ct ){\n                $('.xdsoft_today')\n                .addClass('xdsoft_disabled');\n  /*              $('.xdsoft_date.xdsoft_weekend')\n                .addClass('xdsoft_disabled'); */\n            }\n      });          \n    }\n    \n    K('section[School Information]').show();\n /*   K('section[School Details]').show(); */\n    K('section[Payment Details]').show();\n\n  }\n});",
+                  "bridgedResourceName": null,
+                  "runIf": "values('Members')!==null"
+                },
+                {
+                  "name": "Clear Member Details",
+                  "type": "Change",
+                  "action": "Custom",
+                  "code": "K('field[Member ID]').value(\"\");\nK('field[First Name]').value(\"\");\nK('field[Last Name]').value(\"\");\nK('field[Payment Method]').value(\"\");\n\nK('section[School Information]').hide();\nK('section[Credit Card Details]').hide();\n\nK('section[Payment Details]').hide();\n\nK('section[Member Select Space]').show();    \n",
+                  "runIf": "values('Members')===null && !form('review')"
+                }
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "dropdown",
+              "choicesResourceName": null,
+              "choicesRunIf": null,
+              "choices": [
+
+              ]
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Members Select",
+              "text": "<div id=\"selectMemberMenu\"></div>",
+              "visible": true,
+              "renderAttributes": {
+              }
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "School Information",
+          "title": "School Information",
+          "visible": false,
+          "omitWhenHidden": false,
+          "renderAttributes": {
+          },
+          "elements": [
+            {
+              "type": "field",
+              "name": "Member ID",
+              "label": "Member ID",
+              "key": "f39",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": false,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Member GUID",
+              "label": "Member GUID",
+              "key": "f60",
+              "defaultValue": "${resources('Get Member By Username:id')}",
+              "defaultResourceName": "Get Member By Username",
+              "visible": false,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "First Name",
+              "label": "First Name",
+              "key": "f28",
+              "defaultValue": "GB",
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": false,
+              "required": true,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+                {
+                  "name": "Set Requested For",
+                  "type": "Change",
+                  "action": "Set Fields",
+                  "mappings": [
+                    {
+                      "field": "Requested For",
+                      "value": "${values('First Name')} ${values('Last Name')}",
+                      "visible": null
+                    }
+                  ]
+                }
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Last Name",
+              "label": "Last Name",
+              "key": "f29",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": false,
+              "required": true,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+                {
+                  "name": "Set Requested For",
+                  "type": "Change",
+                  "action": "Set Fields",
+                  "mappings": [
+                    {
+                      "field": "Requested For",
+                      "value": "${values('First Name')} ${values('Last Name')}",
+                      "visible": null
+                    }
+                  ]
+                }
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Requested For",
+              "label": "School Name",
+              "key": "f66",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": false,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "School Details",
+          "title": "Billing Details",
+          "visible": false,
+          "omitWhenHidden": false,
+          "renderAttributes": {
+            "class": "services-paysmart-billing-details"
+          },
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Autocomplete",
+              "text": "<div id=\"locationField\">\n  <input id=\"autocomplete\"\n         class=\"form-control\"\n         placeholder=\"Enter your address\"\n         onFocus=\"geolocate()\"\n         type=\"text\"/>\n</div>",
+              "visible": "!form('review')",
+              "renderAttributes": {
+              }
+            },
+            {
+              "type": "field",
+              "name": "Address",
+              "label": "Address<button class=\"editButton\"  onclick=\"enabledAddressEdit()\">Manually Enter</button>",
+              "key": "f3",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": "!form('review')",
+              "enabled": false,
+              "required": true,
+              "requiredMessage": null,
+              "omitWhenHidden": true,
+              "pattern": {
+                "regex": "^(.){5,50}$",
+                "message": "Address should be between 5 to 50 characters long"
+              },
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Suburb",
+              "label": "Suburb",
+              "key": "f4",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": false,
+              "required": true,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": {
+                "regex": "^(.){2,30}$",
+                "message": "Suburb should be between 2 to 30 characters long"
+              },
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Postcode",
+              "label": "Postcode",
+              "key": "f5",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": false,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Country",
+              "label": "Country",
+              "key": "f55",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "State",
+              "label": "State",
+              "key": "f68",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": false,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Email",
+              "label": "Email",
+              "key": "f9",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": false,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": {
+                "regex": "[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[A-z0-9](?:[A-z0-9-]*[A-z0-9])?\\.)+[A-z0-9](?:[A-z0-9-]*[A-z0-9])?$",
+                "message": "Email should be a valid email address"
+              },
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Payment Details",
+          "title": "Payment Details",
+          "visible": false,
+          "omitWhenHidden": false,
+          "renderAttributes": {
+            "class": "services-paysmart-billing-details"
+          },
+          "elements": [
+            {
+              "type": "field",
+              "name": "Billing Period",
+              "label": "Billing Period",
+              "key": "f43",
+              "defaultValue": "Monthly",
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": false,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Payment",
+              "label": "Payment",
+              "key": "f11",
+              "defaultValue": "350",
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": false,
+              "required": true,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": {
+                "regex": "^\\d+(\\.\\d{1,2})?$",
+                "message": "Payment should be valid number with maximum 2 decimal places"
+              },
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Billing Start Date HTML",
+              "text": "<div class=\"form-group required\" linkedField=\"Billing Start Date\">  \n  <label class=\"field-label\" for=\"billingstartdate\">Payment Start Date</label>\n  <div id=\"billingstartdate\"></div>\n</div>",
+              "visible": true,
+              "renderAttributes": {
+              }
+            },
+            {
+              "type": "field",
+              "name": "Billing Start Date",
+              "label": "Payment Start Date",
+              "key": "f13",
+              "defaultValue": "",
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": true,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "date"
+            },
+            {
+              "type": "field",
+              "name": "Payment Method",
+              "label": "Payment Method",
+              "key": "f22",
+              "defaultValue": "",
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": true,
+              "required": true,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+                {
+                  "name": "Load Card",
+                  "type": "Change",
+                  "action": "Custom",
+                  "code": "cardElement = elements.create('card', {hidePostalCode: true});\ncardElement.mount('#card-element');\ncardElement.on('change', function(event) {\n  debugger;\n\tif (event.complete) {\n     K('field[Payment Method Complete]').value(\"COMPLETED\");\t\t\n  } else {\n     K('field[Payment Method Complete]').value(\"\");\t\t\n  }\n});",
+                  "runIf": "cardElement===null"
+                },
+                {
+                  "name": "Load Bank Account(EU)",
+                  "type": "Change",
+                  "action": "Custom",
+                  "code": "// Custom styling can be passed to options when creating an Element.\nvar style = {\n  base: {\n    color: '#32325d',\n    fontSize: '16px',\n    '::placeholder': {\n      color: '#aab7c4'\n    },\n    ':-webkit-autofill': {\n      color: '#32325d',\n    },\n  },\n  invalid: {\n    color: '#fa755a',\n    iconColor: '#fa755a',\n    ':-webkit-autofill': {\n      color: '#fa755a',\n    },\n  },\n};\nvar options = {\n  style: style,\n  supportedCountries: ['SEPA'],\n  // Elements can use a placeholder as an example IBAN that reflects\n  // the IBAN format of your customer's country. If you know your\n  // customer's country, we recommend that you pass it to the Element as the\n  // placeholderCountry.\n  placeholderCountry: 'DE',\n};\n\n// Create an instance of the IBAN Element\niban = elements.create('iban', options);\n\n// Add an instance of the IBAN Element into the `iban-element` <div>\niban.mount('#iban-element');\niban.on('change', function(event) {\n  debugger;\n\tif (event.complete) {\n     K('field[Payment Method Complete]').value(\"COMPLETED\");\t\t\n  } else {\n     K('field[Payment Method Complete]').value(\"\");\t\t\n  }\n});",
+                  "runIf": "values('Payment Method')===\"Bank Account(EU)\" "
+                }
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "dropdown",
+              "choicesResourceName": null,
+              "choicesRunIf": null,
+              "choices": [
+                {
+                  "label": "Credit Card",
+                  "value": "Credit Card"
+                },
+                {
+                  "label": "Bank Account(EU)",
+                  "value": "Bank Account(EU)"
+                }
+              ]
+            },
+            {
+              "type": "field",
+              "name": "Payment Method Complete",
+              "label": "Payment Method Complete",
+              "key": "f67",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Credit Card Details",
+          "title": "Credit Card Details",
+          "visible": "values('Payment Method') === 'Credit Card'",
+          "omitWhenHidden": true,
+          "renderAttributes": {
+            "class": "services-paysmart-billing-details"
+          },
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Credit Card Capture",
+              "text": "\n<!--\n  Or create a <label> with a 'for' attribute,\n  referencing the ID of your container.\n-->\n<label for=\"card-element\"></label>\n<div id=\"card-element\"></div>\n",
+              "visible": true,
+              "renderAttributes": {
+              }
+            },
+            {
+              "type": "field",
+              "name": "Credit Card Number",
+              "label": "Credit Card Number",
+              "key": "f15",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": {
+                "regex": "^(?:4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\\d{3})\\d{11}|^...[0-9][0-9][0-9][0-9])$",
+                "message": "Credit card number should be a valid CC number"
+              },
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Credit Card Expiry Month",
+              "label": "Credit Card Expiry Month",
+              "key": "f63",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Credit Card Expiry Year",
+              "label": "Credit Card Expiry Year",
+              "key": "f64",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "CVV",
+              "label": "CVV",
+              "key": "f62",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Bank Account Details EU",
+          "title": "Bank Account Details",
+          "visible": "values('Payment Method')===\"Bank Account(EU)\"",
+          "omitWhenHidden": false,
+          "renderAttributes": {
+            "class": "services-paysmart-billing-details"
+          },
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Bank Account Capture",
+              "text": "   <!--\n      Using a label with a for attribute that matches the ID of the\n      Element container enables the Element to automatically gain focus\n      when the customer clicks on the label.\n    -->\n    <label for=\"iban-element\">\n      IBAN\n    </label>\n    <div id=\"iban-element\">\n      <!-- A Stripe Element will be inserted here. -->\n    </div>\n  </div>\n\n  <!-- Display mandate acceptance text. -->\n  <div id=\"mandate-acceptance\">\n    By providing your payment information and confirming this payment, you\n    authorise (A) Rocket Rides and Stripe, our payment service provider\n    and/or PPRO, its local service provider, to send instructions to your\n    bank to debit your account and (B) your bank to debit your account in\n    accordance with those instructions. As part of your rights, you are\n    entitled to a refund from your bank under the terms and conditions of\n    your agreement with your bank. A refund must be claimed within 8 weeks\n    starting from the date on which your account was debited. Your rights\n    are explained in a statement that you can obtain from your bank. You\n    agree to receive notifications for future debits up to 2 days before\n    they occur.\n  </div>\n  <!-- Used to display form errors. -->\n  <div id=\"error-message\" role=\"alert\"></div>",
+              "visible": true,
+              "renderAttributes": {
+              }
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Card Error",
+          "title": "",
+          "visible": false,
+          "omitWhenHidden": false,
+          "renderAttributes": {
+          },
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Error Details",
+              "text": "<p class=\"errorDetails\" id=\"errorValue\"/p>",
+              "visible": true,
+              "renderAttributes": {
+              }
+            },
+            {
+              "type": "section",
+              "renderType": null,
+              "name": "Hidden Fields",
+              "title": null,
+              "visible": false,
+              "omitWhenHidden": false,
+              "renderAttributes": {
+              },
+              "elements": [
+                {
+                  "type": "field",
+                  "name": "customerBillingId",
+                  "label": null,
+                  "key": "f65",
+                  "defaultValue": null,
+                  "defaultResourceName": null,
+                  "visible": true,
+                  "enabled": true,
+                  "required": false,
+                  "requiredMessage": null,
+                  "omitWhenHidden": null,
+                  "pattern": null,
+                  "constraints": [
+
+                  ],
+                  "events": [
+
+                  ],
+                  "renderAttributes": {
+                  },
+                  "dataType": "string",
+                  "renderType": "text",
+                  "rows": 1
+                },
+                {
+                  "type": "field",
+                  "name": "Status",
+                  "label": "Status",
+                  "key": "f27",
+                  "defaultValue": null,
+                  "defaultResourceName": null,
+                  "visible": true,
+                  "enabled": true,
+                  "required": false,
+                  "requiredMessage": null,
+                  "omitWhenHidden": null,
+                  "pattern": null,
+                  "constraints": [
+
+                  ],
+                  "events": [
+
+                  ],
+                  "renderAttributes": {
+                  },
+                  "dataType": "string",
+                  "renderType": "text",
+                  "rows": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Member Select Space",
+          "title": null,
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {
+          },
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Member Select Space",
+              "text": "<div style=\"height:300px\"></div>",
+              "visible": true,
+              "renderAttributes": {
+              }
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "label": "Save for Applicant to Complete",
+          "name": "Save for Applicant to Complete",
+          "visible": true,
+          "enabled": true,
+          "renderType": "save",
+          "renderAttributes": {
+          }
+        },
+        {
+          "type": "button",
+          "label": "Submit",
+          "name": "Submit",
+          "visible": true,
+          "enabled": true,
+          "renderType": "custom",
+          "renderAttributes": {
+          },
+          "events": [
+            {
+              "name": "Submit",
+              "type": "Click",
+              "action": "Custom",
+              "code": "debugger;\n\nif (Object.keys(K('form').validate()).length>0) {\n  K('form').submitPage();\n} else {\n  K('button[Submit]').disable();\n  var paymentType=\"\";\n  if (K('field[Payment Method]').value()===\"Credit Card\") {\n    paymentType=\"card\";\n  } else {\n    paymentType=\"sepa_debit\";\n  }\n\n  stripe\n    .createSource(paymentType===\"card\" ? cardElement : ibanElement, {\n    type: paymentType,\n    currency:  K('space').attributes('Currency'),\n    owner: {\n      name: K('field[First Name]').value()+\" \"+K('field[Last Name]').value(),\n    },\n  })\n    .then(function(result) {\n    // Handle result.error or result.source\n    if (result.error) {\n      K('button[Submit]').enable();\n      $(\"#errorValue\").html(result.error.message);\n      K('section[Card Error]').show();\n    } else {\n      debugger;\n      console.log(result.source);\n      sourceID=result.source.id;\n      completeSignUpFee();\n    }    \n  });\n}\n"
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "name": "Load Members Select",
+          "type": "Load",
+          "action": "Custom",
+          "code": "debugger;\n\nif ((GetURLParameter(\"id\")!==null) && !form('review')) {\n    if (!K(\"identity\").teams.includes(\"Role::Program Managers\")) {\n      K('section[Select Member]').hide();\n      K('section[School Information]').show();\n      K('section[School Details]').show();\n      K('section[Payment Details]').show();\n      K('content[Billing Start Date HTML]').hide();\n      K('field[Billing Start Date]').show();\n      K('field[Billing Start Date]').disable();\n      \n      K('button[Save for Applicant to Complete]').hide();\n      K('button[Submit]').show();        \n    } else {\n      K('section[School Information]').show();\n      K('section[School Details]').show();\n      K('section[Payment Details]').show();\n      K('content[Billing Start Date HTML]').show();\n      K('field[Billing Start Date]').hide();\n      if ($(K(\"form\").find(\"#billingstartdate\")[0]).html()===\"\") {\n        var tomorrow = new Date((new Date()).getTime() + 24 * 60 * 60 * 1000);\n        bundle.config.widgets.xdsoftDatepicker({\n          element: K(\"form\").find(\"#billingstartdate\")[0],\n          timepicker: false,\n          displayDateFormat: \"MM/DD/YYYY\",\n          options: {\n            startDate: tomorrow,\n            minDate: 0,\n            formatDate:\"d-m-Y\",\n            validateOnBlur:false\n          },\n          onSelectDate:function(ct,$i){\n            K('field[Billing Start Date]').value(ct.dateFormat('YYYY-MM-DD'));\n          },\n          onGenerate: function( ct ){\n            $('.xdsoft_today')\n              .addClass('xdsoft_disabled');\n          }\n        });          \n      }    \n    }\n} else {      \n   if (K(\"identity\").teams.includes(\"Role::Program Managers\")) {\n     K('bridgedResource[Members]').load({  \n       attributes: ['First Name', 'Last Name','id'],\n       values: {},\n       success: function(bridgedData) {\n         var options=[];\n         $.each( bridgedData, function( key, value ) {\n           console.log(value['id']+\"-\"+value['First Name']+\" \"+value['Last Name']);\n           options[options.length]={'label':value['First Name']+\" \"+value['Last Name'], 'value':value['id']};\n         });\n         var label=null;\n         debugger;   \n         K('field[Members]').options(options);\n\n         bundle.config.widgets.selectMenu({\n           element: K(\"form\").find(\"#selectMemberMenu\")[0],\n           options: K('field[Members]').options(),\n           onChange: function(option) {\n             K('field[Members]').value(option.value);\n             setTimeout(function(){\n               $(K(\"form\").find(\"#selectMemberMenu [class$='placeholder']\")).html(option.label);\n             },100);\n           },\n           value: K('field[Members]').value(),\n         });\n       }\n     });\n   } else {\n    debugger;\n    if (!form('review')) {\n      K('bridgedResource[Get Stripe Payments Schedule]').load({\n        attributes: ['id'],\n        values: {},\n        success: function(bridgedData) {        \n          var html=\"\";\n          var completingSubmission=false;\n          bridgedData.forEach(elem => {\n            if (elem['coreState']===\"Draft\") {\n              html=html+\"<tr><td><p>Click <a href='/#/kapps/services/categories/stripe-billing/stripe-franchisee-payments-schedule/\"+elem.id+\"'>here</a> to complete your Franchisee Payments Schedule.</td></tr>\";\n            } else {\n              html=html+\"<tr><td><p>Click <a href='/#/kapps/services/requests/request/\"+elem.id+\"/review'>here</a> to view your Franchisee Payments Schedule.</td></tr>\";\n              \n            }\n          });\n          if (bridgedData.length===0) {\n\t          K('section[Not to be Completed]').show();            \n          }\n          $(\"#registrationsTableBody\").append(html);\n          K('section[Select Member]').hide();\n          K('button[Save for Applicant to Complete]').hide();\n          K('button[Submit]').hide();\n        }\n      });\n    } else {        \n    }\n }\n}\n",
+          "runIf": ""
+        },
+        {
+          "name": "Load Stripe Card Info",
+          "type": "Load",
+          "action": "Custom",
+          "code": "debugger;\nsetTimeout(function() {\n  stripe = Stripe(K('space').attributes('POS Stripe Publishable Key'),{\"stripeAccount\":K('space').attributes('Stripe Account ID')});\n  elements = stripe.elements();\n\n  cardElement = elements.create('card', {hidePostalCode: true});\n  cardElement.mount('#card-element');\n  cardElement.on('change', function(event) {\n    debugger;\n    if (event.complete) {\n       K('field[Payment Method Complete]').value(\"COMPLETED\");\t\t\n    } else {\n       K('field[Payment Method Complete]').value(\"\");\t\t\n    }\n  });\n},3000);",
+          "runIf": "!form('review')"
+        },
+        {
+          "name": "Review",
+          "type": "Load",
+          "action": "Custom",
+          "code": "K('section[School Information]').show();\nK('section[Payment Details]').show();\n\nK('content[Billing Start Date HTML]').hide();\nK('field[Billing Start Date]').show();\nK('section[Credit Card Details]').hide();\nK('section[Select Member]').hide();",
+          "runIf": "form('review')"
+        }
+      ],
+      "name": "Instalment Information",
+      "renderType": "submittable",
+      "type": "page"
+    }
+  ],
+  "securityPolicies": [
+    {
+      "endpoint": "Display",
+      "name": "Stripe Authenticated Users"
+    },
+    {
+      "endpoint": "Submission Access",
+      "name": "Stripe Authenticated Users"
+    },
+    {
+      "endpoint": "Submission Modification",
+      "name": "Stripe Authenticated Users"
+    }
+  ],
+  "slug": "stripe-franchisee-payments-schedule",
+  "status": "Active",
+  "submissionLabelExpression": "${values('Student First Name')} ${values('Student Last Name')} Start : ${values('Term Date')} - ${submission('id')}",
+  "type": "Service"
+}

@@ -1,6 +1,11 @@
 {
   "attributes": [
-
+    {
+      "name": "Datastore Hidden",
+      "values": [
+        "true"
+      ]
+    }
   ],
   "bridgedResources": [
 
@@ -463,5 +468,5 @@
   ],
   "slug": "journey-event",
   "status": "Active",
-  "submissionLabelExpression": "${values('Record Type')}[${values('Record Name')}]-${values('Contact Type')}-${values('Template Name')}-${values('Status')}"
+  "submissionLabelExpression": "${values('Record Name')}:${values('Record ID')}:${values('Trigger ID')}:${values('Trigger Date')}"
 }

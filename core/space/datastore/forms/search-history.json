@@ -5,6 +5,12 @@
       "values": [
         "[]"
       ]
+    },
+    {
+      "name": "Datastore Hidden",
+      "values": [
+        "true"
+      ]
     }
   ],
   "bridgedResources": [

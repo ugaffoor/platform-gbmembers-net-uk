@@ -86,11 +86,7 @@
     }
   ],
   "categorizations": [
-    {
-      "category": {
-        "slug": "stripe-billing"
-      }
-    }
+
   ],
   "customHeadContent": "<style>\n  .hidden{\n   display:none; \n  }\n  body a {\n      color: #003b72;\n  }  \n</style>\n<script>\n  function GetURLParameter(sParam){\n    arr=window.location.hash.split(sParam+\"=\");\n    if (arr.length>0){\n      return arr[1];\n    }\n    return null;\n  }    \n  function isPrimaryBiller(){\n    var parentMember=K('field[Billing Parent Member]').value();\n    var familyMembers=K('field[Billing Family Members]').value();\n   \tif (K('field[Members]').value()===parentMember && familyMembers!==null && familyMembers!==undefined){\n      var dependants=JSON.parse(familyMembers);\n      if (dependants.length>1) {\n\t      return true;\n      }\n    }\n    return false;\n  }\n</script>",
   "description": "Stripe Request to cancel a Membership",

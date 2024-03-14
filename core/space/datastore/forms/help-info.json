@@ -1,6 +1,11 @@
 {
   "attributes": [
-
+    {
+      "name": "Datastore Hidden",
+      "values": [
+        "true"
+      ]
+    }
   ],
   "bridgedResources": [
 
@@ -239,7 +244,7 @@
     },
     {
       "endpoint": "Submission Access",
-      "name": "Everyone"
+      "name": "Authenticated Users"
     },
     {
       "endpoint": "Submission Modification",

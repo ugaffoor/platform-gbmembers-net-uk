@@ -1,6 +1,11 @@
 {
   "attributes": [
-
+    {
+      "name": "Datastore Hidden",
+      "values": [
+        "true"
+      ]
+    }
   ],
   "bridgedResources": [
 
@@ -685,11 +690,11 @@
     },
     {
       "endpoint": "Submission Access",
-      "name": "Data Admins"
+      "name": "Authenticated Users"
     },
     {
       "endpoint": "Submission Modification",
-      "name": "Data Admins"
+      "name": "Authenticated Users"
     }
   ],
   "slug": "pos-order",

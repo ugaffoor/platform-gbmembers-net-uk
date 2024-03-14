@@ -2597,7 +2597,7 @@
     },
     {
       "endpoint": "Submission Access",
-      "name": "Stripe Program Managers"
+      "name": "Stripe Authenticated Users"
     },
     {
       "endpoint": "Submission Modification",

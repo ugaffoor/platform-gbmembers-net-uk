@@ -75,6 +75,14 @@
         {
           "name": "Get Stripe Member Registrations",
           "query": "kappSlug=services&formSlug=stripe-member-registration&limit=10&q=values[Members]=\"${parameters('Member GUID')}\""
+        },
+        {
+          "name": "Get Stripe Sign Up Fee",
+          "query": "kappSlug=services&formSlug=stripe-franchisee-sign-up-fee&limit=10&q=values[Member GUID]=\"${parameters('Member GUID')}\""
+        },
+        {
+          "name": "Get Stripe Payment Schedule",
+          "query": "kappSlug=services&formSlug=stripe-franchisee-payments-schedule&limit=10&q=values[Member GUID]=\"${parameters('Member GUID')}\""
         }
       ],
       "structure": "Submissions"
@@ -129,6 +137,24 @@
     },
     {
       "name": "Get Stripe Member Registrations",
+      "parameters": [
+        {
+          "name": "Member GUID"
+        }
+      ],
+      "resultType": "Multiple"
+    },
+    {
+      "name": "Get Stripe Payment Schedule",
+      "parameters": [
+        {
+          "name": "Member GUID"
+        }
+      ],
+      "resultType": "Multiple"
+    },
+    {
+      "name": "Get Stripe Sign Up Fee",
       "parameters": [
         {
           "name": "Member GUID"
