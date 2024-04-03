@@ -772,9 +772,30 @@
         {
           "type": "section",
           "renderType": null,
+          "name": "No Profile",
+          "title": null,
+          "visible": "values('POS Profile ID')===\"null\" || values('POS Profile ID')===null || values('POS Profile ID')===\"\" || values('POS Profile ID')==='undefined'",
+          "omitWhenHidden": true,
+          "renderAttributes": {
+          },
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "No Profile Info",
+              "text": "This member does not have a Card Profile stored, or a parent does not have a Card Profile stored.",
+              "visible": true,
+              "renderAttributes": {
+              }
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
           "name": "Payment Info",
           "title": null,
-          "visible": "values('Service ID')!==\"\" && values('Service ID')!==null",
+          "visible": "values('POS Profile ID')!==\"null\" && values('POS Profile ID')!==null && values('POS Profile ID')!==\"\" && values('POS Profile ID')!=='undefined'",
           "omitWhenHidden": true,
           "renderAttributes": {
           },
@@ -1068,8 +1089,8 @@
               "renderType": null,
               "name": "Payment Details",
               "title": "Payment Details",
-              "visible": true,
-              "omitWhenHidden": null,
+              "visible": false,
+              "omitWhenHidden": true,
               "renderAttributes": {
               },
               "elements": [
@@ -1082,7 +1103,7 @@
                   "defaultResourceName": null,
                   "visible": true,
                   "enabled": true,
-                  "required": true,
+                  "required": false,
                   "requiredMessage": null,
                   "omitWhenHidden": null,
                   "pattern": null,
@@ -1223,6 +1244,27 @@
             {
               "type": "section",
               "renderType": null,
+              "name": "Card Error",
+              "title": null,
+              "visible": true,
+              "omitWhenHidden": null,
+              "renderAttributes": {
+              },
+              "elements": [
+                {
+                  "type": "content",
+                  "renderType": "html",
+                  "name": "Error Details",
+                  "text": "<p class=\"errorDetails\" id=\"errorValue\"/p>",
+                  "visible": true,
+                  "renderAttributes": {
+                  }
+                }
+              ]
+            },
+            {
+              "type": "section",
+              "renderType": null,
               "name": "Bank Account Details",
               "title": "Bank Account Details",
               "visible": "values('Payment Method')===\"Bank Account\"",
@@ -1256,30 +1298,9 @@
                   "name": "Register Service",
                   "type": "Click",
                   "action": "Custom",
-                  "code": "if (Object.keys(K('form').validate()).length>0) {\n  K('form').submitPage();\n} else {\n  debugger;\n  var paymentType=\"\";\n  if (K('field[Payment Method]').value()===\"Credit Card\") {\n    paymentType=\"card\";\n  } else {\n    paymentType=\"sepa_debit\";\n  }\n\n  stripe\n    .createSource(paymentType===\"card\" ? cardElement : ibanElement, {\n    type: paymentType,\n    currency:  K('space').attributes('Currency'),\n    owner: {\n      name: K('field[Student First Name]').value()+\" \"+K('field[Student Last Name]').value(),\n      address: {\n        line1: K('field[Address]').value(),\n        city: K('field[Suburb]').value(),\n        state: K('field[State]').value(),\n        postal_code: K('field[Postcode]').value(),\n        country: \"GB\"\n      }\n    },\n  })\n  .then(function(result) {\n    // Handle result.error or result.source\n    if (result.error) {\n      $(\"#errorValue\").html(result.error.message);\n      K('section[Card Error]').show();\n    } else {\n      debugger;\n      console.log(result.source);\n      sourceID=result.source.id;\n\n      var settings = {\n        \"crossDomain\": true,\n        \"url\": K('space').attributes('Kinetic Billing Server URL')+\"/registerUser\",\n        \"method\": \"POST\",\n        \"headers\": {},\n        \"dataType\": \"json\",\n        \"contentType\": \"application/json\",\n        \"data\": JSON.stringify({\n        \"customerId\": K('field[Member ID]').value(),\n        \"firstName\": K('field[Student First Name]').value(),\n        \"lastName\": K('field[Student Last Name]').value(),\n        \"dob\": K('field[DOB]').value(),\n        \"address\": K('field[Address]').value(),\n        \"suburb\": K('field[Suburb]').value(),\n        \"state\": K('field[State]').value(),\n        \"postCode\": K('field[Postcode]').value(),\n        \"email\": K('field[Email]').value(),\n        \"mobile\": K('field[Mobile]').value(),\n        \"payment\": K('field[Fee]').value(),\n        \"paymentMethod\": K('field[Payment Method]').value(),\n        \"billingPeriod\": K('field[Payment Frequency]').value(),\n        \"contractStartDate\": K('field[Start Date]').value(),\n        \"contractEndDate\": K('field[End Date]').value(),\n        \"subscriptionType\": K('field[Name]').value(),\n        \"cardToken\": sourceID,\n        \"adminFee\": \"\", /*K('field[Admin Fee]').value().replace(\"%\",\"\"),*/\n        \"setupFee\": \"\", /*K('field[Setup Fee]').value().replace(\"%\",\"\"),*/\n        \"space\": K('space').slug(),\n        \"billingService\": K('space').attributes('Billing Company'),\n        \"currency\": K('space').attributes('Currency'),\n        })\n      }\n\n      $.ajax(settings).done(function (registerResponse) {\n        debugger;\n        console.log(registerResponse);\n        if (registerResponse.error===100) {\n          var message=registerResponse.errorMessage;\n          if (registerResponse.errorMessage===\"DECLINE\") {\n            message=\"Credit Card not valid (Declined)\";  \n          }\n          $(\"#errorValue\").html(message);\n          K('section[Card Error]').show();\n        } else {\n          K('section[Card Error]').hide();\n          K('field[Billing ID]').value(registerResponse.data.customerBillingId);\n          K('form').submitPage();\n        }\n      });    \n    }    \n  });  \n }"
+                  "code": "K('section[Card Error]').hide();\nif (Object.keys(K('form').validate()).length>0) {\n  K('form').submitPage();\n} else {\n  var settings = {\n    \"crossDomain\": true,\n    \"url\": K('space').attributes('Kinetic Billing Server URL')+\"/registerUser\",\n    \"method\": \"POST\",\n    \"headers\": {},\n    \"dataType\": \"json\",\n    \"contentType\": \"application/json\",\n    \"data\": JSON.stringify({\n      \"customerId\": K('field[Member ID]').value(),\n      \"firstName\": K('field[Student First Name]').value(),\n      \"lastName\": K('field[Student Last Name]').value(),\n      \"dob\": K('field[DOB]').value(),\n      \"address\": K('field[Address]').value(),\n      \"suburb\": K('field[Suburb]').value(),\n      \"state\": K('field[State]').value(),\n      \"postCode\": K('field[Postcode]').value(),\n      \"email\": K('field[Email]').value(),\n      \"mobile\": K('field[Mobile]').value(),\n      \"payment\": K('field[Fee]').value(),\n      \"billingPeriod\": K('field[Payment Frequency]').value(),\n      \"contractStartDate\": K('field[Start Date]').value(),\n      \"contractEndDate\": K('field[End Date]').value(),\n      \"cardToken\": K('field[POS Profile ID]').value(),\n      \"paymentMethod\": \"Credit Card\",\n      \"subscriptionType\": \"Additional Service\",\n      \"ref1\": \"AdditionalService\",\n      \"ref2\": K('field[Name]').value(),\n      \"space\": K('space').slug(),\n      \"currency\": K('space').attributes('Currency'),\n      \"billingService\": \"Stripe\",\n    })\n  }\n\n  $.ajax(settings).done(function (registerResponse) {\n    debugger;\n    console.log(registerResponse);\n    if (registerResponse.error===100) {\n      var message=registerResponse.errorMessage;\n      if (registerResponse.errorMessage===\"DECLINE\") {\n        message=\"Credit Card not valid (Declined)\";  \n      }\n      $(\"#errorValue\").html(message);\n      K('section[Card Error]').show();\n    } else {\n      K('section[Card Error]').hide();\n      K('field[Billing ID]').value(registerResponse.data.customerBillingId);\n      K('form').submitPage();\n    }\n\t});\n }"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "type": "section",
-          "renderType": null,
-          "name": "Card Error",
-          "title": null,
-          "visible": true,
-          "omitWhenHidden": null,
-          "renderAttributes": {
-          },
-          "elements": [
-            {
-              "type": "content",
-              "renderType": "html",
-              "name": "Error Details",
-              "text": "<p class=\"errorDetails\" id=\"errorValue\"/p>",
-              "visible": true,
-              "renderAttributes": {
-              }
             }
           ]
         }
