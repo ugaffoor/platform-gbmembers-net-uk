@@ -126,6 +126,11 @@
   },
   {
     "allowsMultiple": false,
+    "description": "YES to not apply a Admin fee percentage",
+    "name": "Ignore Admin Fee"
+  },
+  {
+    "allowsMultiple": false,
     "description": "Form used by Admins to mass invite others to kinops",
     "name": "Invite Others Form Slug"
   },
@@ -343,6 +348,11 @@
     "allowsMultiple": false,
     "description": "Slug of this spaces Tech Bar Kapp (typically tech-bar)",
     "name": "Tech Bar Kapp Slug"
+  },
+  {
+    "allowsMultiple": false,
+    "description": "Items if selected will be hidden on the Adult/Womens/Kids waiver forms.",
+    "name": "Waiver Hidden Items"
   },
   {
     "allowsMultiple": false,

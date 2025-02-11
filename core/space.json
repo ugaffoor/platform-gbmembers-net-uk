@@ -143,6 +143,12 @@
       ]
     },
     {
+      "name": "Ignore Admin Fee",
+      "values": [
+        "YES"
+      ]
+    },
+    {
       "name": "Invite Others Form Slug",
       "values": [
         "kinops-invite-others"
@@ -205,7 +211,7 @@
     {
       "name": "POS System",
       "values": [
-        "StripeTerminal"
+        "Stripe"
       ]
     },
     {
@@ -385,6 +391,12 @@
       "name": "Task Source Name",
       "values": [
         "Kinetic Request CE"
+      ]
+    },
+    {
+      "name": "Waiver Hidden Items",
+      "values": [
+        "info_images,social_media,report_aboutus,report_many_days,health_info,juijitsui_previous,juijitsui_long,juijitsui_current,juijitsui_benefits,path_to_excellance"
       ]
     },
     {

@@ -175,7 +175,7 @@
                   "name": "Get Members",
                   "type": "Change",
                   "action": "Custom",
-                  "code": "K('bridgedResource[Get Member]').load({\n  attributes: ['Member ID', 'First Name', 'Last Name'],\n  values: {'ID' : 'Allen'},\n  success: function(bridgedData) {\n debugger;   \n    if (bridgedData===null) return;\n    K('field[Member GUID]').value(bridgedData['id']);\n    K('field[Member ID]').value(bridgedData['Member ID']);\n    K('field[First Name]').value(bridgedData['First Name']);\n    K('field[Last Name]').value(bridgedData['Last Name']);\n\n    K('field[Address]').value(bridgedData['Address']);\n    K('field[Suburb]').value(bridgedData['Suburb']);\n    K('field[Postcode]').value(bridgedData['Postcode']);\n    K('field[State]').value(bridgedData['State']);\n\n    K('field[Email]').value(bridgedData['Email']);\n    K('field[Payment Method]').value(\"Credit Card\");\n    K('field[Payment Method]').disable();\n    \n    if ($(K(\"form\").find(\"#billingstartdate\")[0]).html()===\"\") {\n      var tomorrow = new Date((new Date()).getTime() + 24 * 60 * 60 * 1000);\n      bundle.config.widgets.xdsoftDatepicker({\n        element: K(\"form\").find(\"#billingstartdate\")[0],\n        timepicker: false,\n        displayDateFormat: \"MM/DD/YYYY\",\n        options: {\n          startDate: tomorrow,\n          minDate: 0,\n          formatDate:\"d-m-Y\",\n          validateOnBlur:false\n        },\n        onSelectDate:function(ct,$i){\n          K('field[Billing Start Date]').value(ct.dateFormat('YYYY-MM-DD'));\n        },\n        onGenerate: function( ct ){\n                $('.xdsoft_today')\n                .addClass('xdsoft_disabled');\n  /*              $('.xdsoft_date.xdsoft_weekend')\n                .addClass('xdsoft_disabled'); */\n            }\n      });          \n    }\n    \n    K('section[School Information]').show();\n /*   K('section[School Details]').show(); */\n    K('section[Payment Details]').show();\n\n  }\n});",
+                  "code": "K('bridgedResource[Get Member]').load({\n  attributes: ['Member ID', 'First Name', 'Last Name'],\n  values: {'ID' : 'Allen'},\n  success: function(bridgedData) {\n debugger;   \n    if (bridgedData===null) return;\n    K('field[Member GUID]').value(bridgedData['id']);\n    K('field[Member ID]').value(bridgedData['Member ID']);\n    K('field[First Name]').value(bridgedData['First Name']);\n    K('field[Last Name]').value(bridgedData['Last Name']);\n\n    K('field[Address]').value(bridgedData['Address']);\n    K('field[Suburb]').value(bridgedData['Suburb']);\n    K('field[Postcode]').value(bridgedData['Postcode']);\n    K('field[State]').value(bridgedData['State']);\n\n    K('field[Billing Customer Reference]').value(bridgedData['Billing Customer Reference']);\n    K('field[Current Payment]').value(bridgedData['Membership Cost']);\n    $(\"#currentPayment\").html(bridgedData['Membership Cost']);\n    \n    K('field[Email]').value(bridgedData['Email']);\n    K('field[Payment Method]').value(\"Credit Card\");\n    K('field[Payment Method]').disable();\n    \n    if ($(K(\"form\").find(\"#billingstartdate\")[0]).html()===\"\") {\n      var tomorrow = new Date((new Date()).getTime() + 24 * 60 * 60 * 1000);\n      bundle.config.widgets.xdsoftDatepicker({\n        element: K(\"form\").find(\"#billingstartdate\")[0],\n        timepicker: false,\n        displayDateFormat: \"MM/DD/YYYY\",\n        options: {\n          startDate: tomorrow,\n          minDate: 0,\n          formatDate:\"d-m-Y\",\n          validateOnBlur:false\n        },\n        onSelectDate:function(ct,$i){\n          K('field[Billing Start Date]').value(ct.dateFormat('YYYY-MM-DD'));\n        },\n        onGenerate: function( ct ){\n                $('.xdsoft_today')\n                .addClass('xdsoft_disabled');\n  /*              $('.xdsoft_date.xdsoft_weekend')\n                .addClass('xdsoft_disabled'); */\n            }\n      });          \n    }\n    \n    K('section[School Information]').show();\n /*   K('section[School Details]').show(); */\n    K('section[Payment Details]').show();\n\n  }\n});",
                   "bridgedResourceName": null,
                   "runIf": "values('Members')!==null"
                 },
@@ -183,7 +183,7 @@
                   "name": "Clear Member Details",
                   "type": "Change",
                   "action": "Custom",
-                  "code": "K('field[Member ID]').value(\"\");\nK('field[First Name]').value(\"\");\nK('field[Last Name]').value(\"\");\nK('field[Payment Method]').value(\"\");\n\nK('section[School Information]').hide();\nK('section[Credit Card Details]').hide();\n\nK('section[Payment Details]').hide();\n\nK('section[Member Select Space]').show();    \n",
+                  "code": "K('field[Member ID]').value(\"\");\nK('field[First Name]').value(\"\");\nK('field[Last Name]').value(\"\");\nK('field[Payment Method]').value(\"\");\nK('field[Billing Customer Reference]').value(\"\");\n\nK('section[School Information]').hide();\nK('section[Credit Card Details]').hide();\n\nK('section[Payment Details]').hide();\n\nK('section[Member Select Space]').show();    \n",
                   "runIf": "values('Members')===null && !form('review')"
                 }
               ],
@@ -352,6 +352,31 @@
               "required": false,
               "requiredMessage": null,
               "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "field",
+              "name": "Billing Customer Reference",
+              "label": null,
+              "key": "f70",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
               "pattern": null,
               "constraints": [
 
@@ -551,6 +576,52 @@
         {
           "type": "section",
           "renderType": null,
+          "name": "Current Account",
+          "title": null,
+          "visible": "values('Billing Customer Reference')!==null",
+          "omitWhenHidden": false,
+          "renderAttributes": {
+          },
+          "elements": [
+            {
+              "type": "field",
+              "name": "Current Payment",
+              "label": "Current Payment",
+              "key": "f71",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": false,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": false,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "text",
+              "rows": 1
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Current account Info",
+              "text": "<p>This school already has a Scheduled account with a value of £<span id='currentPayment'/>, you can only modify the value of this account with this form.</p>",
+              "visible": true,
+              "renderAttributes": {
+              }
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
           "name": "Payment Details",
           "title": "Payment Details",
           "visible": false,
@@ -586,10 +657,57 @@
             },
             {
               "type": "field",
+              "name": "Franchisee Band",
+              "label": "Franchisee Band",
+              "key": "f69",
+              "defaultValue": null,
+              "defaultResourceName": null,
+              "visible": true,
+              "enabled": true,
+              "required": false,
+              "requiredMessage": null,
+              "omitWhenHidden": null,
+              "pattern": null,
+              "constraints": [
+
+              ],
+              "events": [
+                {
+                  "name": "Set Payment",
+                  "type": "Change",
+                  "action": "Set Fields",
+                  "mappings": [
+                    {
+                      "field": "Payment",
+                      "value": "${values('Franchisee Band')}",
+                      "visible": null
+                    }
+                  ]
+                }
+              ],
+              "renderAttributes": {
+              },
+              "dataType": "string",
+              "renderType": "dropdown",
+              "choicesResourceName": null,
+              "choicesRunIf": null,
+              "choices": [
+                {
+                  "label": "Old Band A £130",
+                  "value": "130"
+                },
+                {
+                  "label": "Band A £350",
+                  "value": "350"
+                }
+              ]
+            },
+            {
+              "type": "field",
               "name": "Payment",
               "label": "Payment",
               "key": "f11",
-              "defaultValue": "350",
+              "defaultValue": "",
               "defaultResourceName": null,
               "visible": true,
               "enabled": false,
@@ -617,7 +735,7 @@
               "renderType": "html",
               "name": "Billing Start Date HTML",
               "text": "<div class=\"form-group required\" linkedField=\"Billing Start Date\">  \n  <label class=\"field-label\" for=\"billingstartdate\">Payment Start Date</label>\n  <div id=\"billingstartdate\"></div>\n</div>",
-              "visible": true,
+              "visible": "values('Billing Customer Reference')===null",
               "renderAttributes": {
               }
             },
@@ -630,7 +748,7 @@
               "defaultResourceName": null,
               "visible": false,
               "enabled": true,
-              "required": true,
+              "required": "values('Billing Customer Reference')===null",
               "requiredMessage": null,
               "omitWhenHidden": false,
               "pattern": null,
@@ -652,11 +770,11 @@
               "key": "f22",
               "defaultValue": "",
               "defaultResourceName": null,
-              "visible": true,
+              "visible": "values('Billing Customer Reference')===null",
               "enabled": true,
               "required": true,
               "requiredMessage": null,
-              "omitWhenHidden": null,
+              "omitWhenHidden": false,
               "pattern": null,
               "constraints": [
 
@@ -726,7 +844,7 @@
           "renderType": null,
           "name": "Credit Card Details",
           "title": "Credit Card Details",
-          "visible": "values('Payment Method') === 'Credit Card'",
+          "visible": "values('Payment Method') === 'Credit Card' && values('Billing Customer Reference')===null",
           "omitWhenHidden": true,
           "renderAttributes": {
             "class": "services-paysmart-billing-details"
@@ -851,7 +969,7 @@
           "renderType": null,
           "name": "Bank Account Details EU",
           "title": "Bank Account Details",
-          "visible": "values('Payment Method')===\"Bank Account(EU)\"",
+          "visible": "values('Payment Method')===\"Bank Account(EU)\" && values('Billing Customer Reference')===null",
           "omitWhenHidden": false,
           "renderAttributes": {
             "class": "services-paysmart-billing-details"
@@ -976,7 +1094,7 @@
           "type": "button",
           "label": "Save for Applicant to Complete",
           "name": "Save for Applicant to Complete",
-          "visible": true,
+          "visible": "values('Billing Customer Reference')===null",
           "enabled": true,
           "renderType": "save",
           "renderAttributes": {
@@ -993,10 +1111,18 @@
           },
           "events": [
             {
-              "name": "Submit",
+              "name": "Submit New Account",
               "type": "Click",
               "action": "Custom",
-              "code": "debugger;\n\nif (Object.keys(K('form').validate()).length>0) {\n  K('form').submitPage();\n} else {\n  K('button[Submit]').disable();\n  var paymentType=\"\";\n  if (K('field[Payment Method]').value()===\"Credit Card\") {\n    paymentType=\"card\";\n  } else {\n    paymentType=\"sepa_debit\";\n  }\n\n  stripe\n    .createSource(paymentType===\"card\" ? cardElement : ibanElement, {\n    type: paymentType,\n    currency:  K('space').attributes('Currency'),\n    owner: {\n      name: K('field[First Name]').value()+\" \"+K('field[Last Name]').value(),\n    },\n  })\n    .then(function(result) {\n    // Handle result.error or result.source\n    if (result.error) {\n      K('button[Submit]').enable();\n      $(\"#errorValue\").html(result.error.message);\n      K('section[Card Error]').show();\n    } else {\n      debugger;\n      console.log(result.source);\n      sourceID=result.source.id;\n      completeSignUpFee();\n    }    \n  });\n}\n"
+              "code": "debugger;\n\nif (Object.keys(K('form').validate()).length>0) {\n  K('form').submitPage();\n} else {\n  K('button[Submit]').disable();\n  var paymentType=\"\";\n  if (K('field[Payment Method]').value()===\"Credit Card\") {\n    paymentType=\"card\";\n  } else {\n    paymentType=\"sepa_debit\";\n  }\n\n  stripe\n    .createSource(paymentType===\"card\" ? cardElement : ibanElement, {\n    type: paymentType,\n    currency:  K('space').attributes('Currency'),\n    owner: {\n      name: K('field[First Name]').value()+\" \"+K('field[Last Name]').value(),\n    },\n  })\n    .then(function(result) {\n    // Handle result.error or result.source\n    if (result.error) {\n      K('button[Submit]').enable();\n      $(\"#errorValue\").html(result.error.message);\n      K('section[Card Error]').show();\n    } else {\n      debugger;\n      console.log(result.source);\n      sourceID=result.source.id;\n      completeSignUpFee();\n    }    \n  });\n}\n",
+              "runIf": "values('Billing Customer Reference')===null"
+            },
+            {
+              "name": "Submit Update Account",
+              "type": "Click",
+              "action": "Custom",
+              "code": "    var registerSettings = {\n      \"crossDomain\": true,\n      \"url\": K('space').attributes('Kinetic Billing Server URL')+\"/scheduledAmountChange\",\n      \"method\": \"POST\",\n      \"headers\": {},\n      \"dataType\": \"json\",\n      \"contentType\": \"application/json\",\n      \"data\": JSON.stringify({\n        \"customerId\": K('field[Billing Customer Reference]').value(),\n        \"payment\": K('field[Payment]').value(),\n        \"space\": K('space').slug(),\n        \"billingService\": K('space').attributes('Billing Company')\n      })\n    }\n    $.ajax(registerSettings).done(function (response) {\n      debugger;\n      console.log(response);\n      if (response.error===100) {\n        var message=response.errorMessage;\n        if (response.errorMessage===\"DECLINE\") {\n          message=\"Credit Card not valid (Declined)\";  \n        }\n        $(\"#errorValue\").html(message);\n        K('section[Card Error]').show();\n      } else {\n        K('section[Card Error]').hide();\n        K('form').submitPage();\n      }\n    });        \n",
+              "runIf": "values('Billing Customer Reference')!==null"
             }
           ]
         }
@@ -1020,7 +1146,7 @@
           "name": "Review",
           "type": "Load",
           "action": "Custom",
-          "code": "K('section[School Information]').show();\nK('section[Payment Details]').show();\n\nK('content[Billing Start Date HTML]').hide();\nK('field[Billing Start Date]').show();\nK('section[Credit Card Details]').hide();\nK('section[Select Member]').hide();",
+          "code": "K('section[School Information]').show();\nK('section[Payment Details]').show();\n\nK('content[Billing Start Date HTML]').hide();\nif (K('field[Billing Start Date]').value()!==null) {\n\tK('field[Billing Start Date]').show();\n}\nK('section[Current Account]').hide();\nK('section[Credit Card Details]').hide();\nK('section[Select Member]').hide();",
           "runIf": "form('review')"
         }
       ],
