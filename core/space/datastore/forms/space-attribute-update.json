@@ -6,7 +6,7 @@
 
   ],
   "customHeadContent": null,
-  "description": "Maintain SMS templates for quickly sending SMS'",
+  "description": "Used to update a space attribute. This will also give us an audit trail of updates applied.",
   "indexDefinitions": [
     {
       "name": "createdAt",
@@ -58,36 +58,42 @@
       "unique": false
     },
     {
-      "name": "values[Category]",
+      "name": "values[Attribute Name]",
       "parts": [
-        "values[Category]"
+        "values[Attribute Name]"
       ],
       "unique": false
     },
     {
-      "name": "values[Category],values[Template Name]",
+      "name": "values[New Value]",
       "parts": [
-        "values[Category]",
-        "values[Template Name]"
+        "values[New Value]"
       ],
       "unique": false
     },
     {
-      "name": "values[SMS Content]",
+      "name": "values[Original Value]",
       "parts": [
-        "values[SMS Content]"
+        "values[Original Value]"
       ],
       "unique": false
     },
     {
-      "name": "values[Template Name]",
+      "name": "values[Status]",
       "parts": [
-        "values[Template Name]"
+        "values[Status]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Updated By]",
+      "parts": [
+        "values[Updated By]"
       ],
       "unique": false
     }
   ],
-  "name": "SMS Templates",
+  "name": "Space Attribute Update",
   "notes": null,
   "pages": [
     {
@@ -97,9 +103,49 @@
       "elements": [
         {
           "type": "field",
-          "name": "Template Name",
-          "label": "Template",
+          "name": "Status",
+          "label": "Status",
           "key": "f1",
+          "defaultValue": "New",
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": true,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "radio",
+          "choicesResourceName": null,
+          "choicesRunIf": null,
+          "choices": [
+            {
+              "label": "New",
+              "value": "New"
+            },
+            {
+              "label": "Completed",
+              "value": "Completed"
+            },
+            {
+              "label": "Delete",
+              "value": "Delete"
+            }
+          ]
+        },
+        {
+          "type": "field",
+          "name": "Attribute Name",
+          "label": "Attribute Name",
+          "key": "f4",
           "defaultValue": null,
           "defaultResourceName": null,
           "visible": true,
@@ -122,8 +168,8 @@
         },
         {
           "type": "field",
-          "name": "Category",
-          "label": "Category",
+          "name": "Original Value",
+          "label": "Original Value",
           "key": "f2",
           "defaultValue": null,
           "defaultResourceName": null,
@@ -147,8 +193,8 @@
         },
         {
           "type": "field",
-          "name": "SMS Content",
-          "label": "SMS Content",
+          "name": "New Value",
+          "label": "New Value",
           "key": "f3",
           "defaultValue": null,
           "defaultResourceName": null,
@@ -168,11 +214,36 @@
           },
           "dataType": "string",
           "renderType": "text",
-          "rows": 20
+          "rows": 1
+        },
+        {
+          "type": "field",
+          "name": "Updated By",
+          "label": "Updated By",
+          "key": "f6",
+          "defaultValue": null,
+          "defaultResourceName": null,
+          "visible": true,
+          "enabled": true,
+          "required": true,
+          "requiredMessage": null,
+          "omitWhenHidden": null,
+          "pattern": null,
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "renderAttributes": {
+          },
+          "dataType": "string",
+          "renderType": "text",
+          "rows": 1
         },
         {
           "type": "button",
-          "label": "Save",
+          "label": "Submit",
           "name": "Submit Button",
           "visible": true,
           "enabled": true,
@@ -195,15 +266,19 @@
       "name": "Data Admins"
     },
     {
+      "endpoint": "Modification",
+      "name": "Admins"
+    },
+    {
       "endpoint": "Submission Access",
-      "name": "Authenticated Users"
+      "name": "Data Admins"
     },
     {
       "endpoint": "Submission Modification",
       "name": "Data Admins"
     }
   ],
-  "slug": "sms-templates",
+  "slug": "space-attribute-update",
   "status": "Active",
-  "submissionLabelExpression": "${values('Category')}-${values('Template Name')}"
+  "submissionLabelExpression": "${values('Attribute Name')}:${values('New Value')}"
 }

@@ -118,41 +118,6 @@
       "name": "Status"
     }
   ],
-  "formTypes": [
-    {
-      "name": "Approval"
-    },
-    {
-      "name": "Console"
-    },
-    {
-      "name": "Content"
-    },
-    {
-      "name": "Datastore"
-    },
-    {
-      "name": "Service"
-    },
-    {
-      "name": "Service Description"
-    },
-    {
-      "name": "Subconsole"
-    },
-    {
-      "name": "Subservice"
-    },
-    {
-      "name": "Template"
-    },
-    {
-      "name": "Utility"
-    },
-    {
-      "name": "Work Order"
-    }
-  ],
   "loginPage": null,
   "name": "Admin",
   "resetPasswordPage": null,
@@ -190,8 +155,5 @@
       "name": "Submission Support"
     }
   ],
-  "slug": "admin",
-  "webApis": [
-
-  ]
+  "slug": "admin"
 }

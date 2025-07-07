@@ -126,6 +126,11 @@
   },
   {
     "allowsMultiple": false,
+    "description": "YES to not apply a Admin fee percentage",
+    "name": "Ignore Admin Fee"
+  },
+  {
+    "allowsMultiple": false,
     "description": "Form used by Admins to mass invite others to kinops",
     "name": "Invite Others Form Slug"
   },
@@ -141,6 +146,11 @@
   },
   {
     "allowsMultiple": false,
+    "description": "Current Belt of Member",
+    "name": "Member Belt Size"
+  },
+  {
+    "allowsMultiple": false,
     "description": "Discounts for family members",
     "name": "Member Discounts"
   },
@@ -148,6 +158,11 @@
     "allowsMultiple": false,
     "description": "Location of the Meta JSON file to work with ReactCacheBuster.\nThis is to ensure code releases are automatically picked up.",
     "name": "Meta JSON Location"
+  },
+  {
+    "allowsMultiple": false,
+    "description": "Migration Mode used to onboard billing information for a school.",
+    "name": "Migration Mode"
   },
   {
     "allowsMultiple": false,
@@ -343,6 +358,11 @@
     "allowsMultiple": false,
     "description": "Slug of this spaces Tech Bar Kapp (typically tech-bar)",
     "name": "Tech Bar Kapp Slug"
+  },
+  {
+    "allowsMultiple": false,
+    "description": "Items if selected will be hidden on the Adult/Womens/Kids waiver forms.",
+    "name": "Waiver Hidden Items"
   },
   {
     "allowsMultiple": false,

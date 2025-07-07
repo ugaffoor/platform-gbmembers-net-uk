@@ -184,35 +184,6 @@
       "name": "Status"
     }
   ],
-  "formTypes": [
-    {
-      "name": "Approval"
-    },
-    {
-      "name": "Console"
-    },
-    {
-      "name": "Content"
-    },
-    {
-      "name": "Service"
-    },
-    {
-      "name": "Service Description"
-    },
-    {
-      "name": "Subservice"
-    },
-    {
-      "name": "Template"
-    },
-    {
-      "name": "Utility"
-    },
-    {
-      "name": "Work Order"
-    }
-  ],
   "loginPage": "",
   "name": "Services",
   "resetPasswordPage": "",
@@ -250,8 +221,5 @@
       "name": "Submission Support"
     }
   ],
-  "slug": "services",
-  "webApis": [
-
-  ]
+  "slug": "services"
 }

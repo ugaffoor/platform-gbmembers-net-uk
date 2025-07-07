@@ -65,32 +65,6 @@
       "name": "Status"
     }
   ],
-  "formTypes": [
-    {
-      "name": "Approval"
-    },
-    {
-      "name": "Console"
-    },
-    {
-      "name": "Content"
-    },
-    {
-      "name": "Service"
-    },
-    {
-      "name": "Service Description"
-    },
-    {
-      "name": "Subservice"
-    },
-    {
-      "name": "Template"
-    },
-    {
-      "name": "Work Order"
-    }
-  ],
   "loginPage": null,
   "name": "Registrations",
   "resetPasswordPage": null,
@@ -128,8 +102,5 @@
       "name": "Admins"
     }
   ],
-  "slug": "registrations",
-  "webApis": [
-
-  ]
+  "slug": "registrations"
 }

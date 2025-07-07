@@ -131,32 +131,6 @@
       "name": "Status"
     }
   ],
-  "formTypes": [
-    {
-      "name": "Approval"
-    },
-    {
-      "name": "Console"
-    },
-    {
-      "name": "Content"
-    },
-    {
-      "name": "Service"
-    },
-    {
-      "name": "Service Description"
-    },
-    {
-      "name": "Subservice"
-    },
-    {
-      "name": "Template"
-    },
-    {
-      "name": "Work Order"
-    }
-  ],
   "loginPage": null,
   "name": "GB Members",
   "resetPasswordPage": null,
@@ -194,8 +168,5 @@
       "name": "Admins"
     }
   ],
-  "slug": "gbmembers",
-  "webApis": [
-
-  ]
+  "slug": "gbmembers"
 }
