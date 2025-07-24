@@ -2185,7 +2185,8 @@
               "name": "Submit Inactive Details",
               "type": "Click",
               "action": "Custom",
-              "code": "debugger;\n\nif (Object.keys(K('form').validate()).length>0) {\n  K('form').submitPage();\n} else {\n  K('button[Submit]').disable();\n  if (K('field[Payment Options]').value()===\"Set new payment details\") {  \n    var paymentType=\"\";\n    if (K('field[Payment Method]').value()===\"Credit Card\") {\n      paymentType=\"card\";\n    } else {\n      paymentType=\"sepa_debit\";\n    }\n\n    stripe\n      .createSource(paymentType===\"card\" ? cardElement : ibanElement, {\n      type: paymentType,\n      currency:  K('space').attributes('Currency'),\n      owner: {\n        name: K('field[Student First Name]').value()+\" \"+K('field[Student Last Name]').value(),\n      },\n    })\n    .then(function(result) {\n      // Handle result.error or result.source\n      if (result.error) {\n        K('button[Submit]').enable();\n        $(\"#errorValue\").html(result.error.message);\n        K('section[Card Error]').show();\n      } else {\n        debugger;\n        console.log(result.source);\n        sourceID=result.source.id;\n        \n        var paymentSettings = {\n          \"crossDomain\": true,\n          \"url\": K('space').attributes('Kinetic Billing Server URL')+\"/savePaymentMethod\",\n          \"method\": \"POST\",\n          \"headers\": {},\n          \"dataType\": \"json\",\n          \"contentType\": \"application/json\",\n          \"data\": JSON.stringify({\n            \"customerId\": K('field[Billing Customer Id]').value(),\n            \"paymentMethod\": \"CREDITCARD\",\n            \"cardToken\": sourceID,\n            \"space\": K('space').slug(),\n            \"billingService\": K('space').attributes('Billing Company'),\n          })\n        }\n        $.ajax(paymentSettings).done(function (response) {\n          debugger;\n          console.log(response);\n          if (response.error===100) {\n            var message=response.errorMessage;\n            if (response.errorMessage===\"DECLINE\") {\n              message=\"Credit Card not valid (Declined)\";  \n            }\n\t\t        K('button[Submit]').enable();\n            $(\"#errorValue\").html(message);\n            K('section[Card Error]').show();\n          } else {\n            K('section[Card Error]').hide();\n            completeRegisterUser();\n          }\n        });                \n        \n      }    \n    });\n  } else {\n    completeRegisterUser();\n  }\n}\n"
+              "code": "debugger;\n\nif (Object.keys(K('form').validate()).length>0) {\n  K('form').submitPage();\n} else {\n  K('button[Submit]').disable();\n  if (K('field[Payment Options]').value()===\"Set new payment details\") {  \n    var paymentType=\"\";\n    if (K('field[Payment Method]').value()===\"Credit Card\") {\n      paymentType=\"card\";\n    } else {\n      paymentType=\"sepa_debit\";\n    }\n\n    stripe\n      .createSource(paymentType===\"card\" ? cardElement : ibanElement, {\n      type: paymentType,\n      currency:  K('space').attributes('Currency'),\n      owner: {\n        name: K('field[Student First Name]').value()+\" \"+K('field[Student Last Name]').value(),\n      },\n    })\n    .then(function(result) {\n      // Handle result.error or result.source\n      if (result.error) {\n        K('button[Submit]').enable();\n        $(\"#errorValue\").html(result.error.message);\n        K('section[Card Error]').show();\n      } else {\n        debugger;\n        console.log(result.source);\n        sourceID=result.source.id;\n        \n        var paymentSettings = {\n          \"crossDomain\": true,\n          \"url\": K('space').attributes('Kinetic Billing Server URL')+\"/savePaymentMethod\",\n          \"method\": \"POST\",\n          \"headers\": {},\n          \"dataType\": \"json\",\n          \"contentType\": \"application/json\",\n          \"data\": JSON.stringify({\n            \"customerId\": K('field[Billing Customer Id]').value(),\n            \"paymentMethod\": \"CREDITCARD\",\n            \"cardToken\": sourceID,\n            \"space\": K('space').slug(),\n            \"billingService\": K('space').attributes('Billing Company'),\n          })\n        }\n        $.ajax(paymentSettings).done(function (response) {\n          debugger;\n          console.log(response);\n          if (response.error===100) {\n            var message=response.errorMessage;\n            if (response.errorMessage===\"DECLINE\") {\n              message=\"Credit Card not valid (Declined)\";  \n            }\n\t\t        K('button[Submit]').enable();\n            $(\"#errorValue\").html(message);\n            K('section[Card Error]').show();\n          } else {\n            K('section[Card Error]').hide();\n            completeRegisterUser();\n          }\n        });                \n        \n      }    \n    });\n  } else {\n    completeRegisterUser();\n  }\n}\n",
+              "runIf": "isEditBillingDetails() && values('Billing Status')===\"Inactive\""
             }
           ]
         }
@@ -2259,15 +2260,15 @@
   "securityPolicies": [
     {
       "endpoint": "Display",
-      "name": "Bombara Program Managers"
+      "name": "Stripe Program Managers"
     },
     {
       "endpoint": "Submission Access",
-      "name": "Bombara Program Managers"
+      "name": "Stripe Program Managers"
     },
     {
       "endpoint": "Submission Modification",
-      "name": "Bombara Program Managers"
+      "name": "Stripe Program Managers"
     }
   ],
   "slug": "stripe-submit-billing-changes",
